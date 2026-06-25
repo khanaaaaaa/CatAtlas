@@ -1,0 +1,114 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #fdf6f0;
+    min-height: 100vh;
+    font-family: 'Press Start 2P', monospace;
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px;
+    color: #1a1a1a;
+}
+
+.container {
+    max-width: 420px;
+    width: 100%;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.subtitle {
+    font-size: 0.45rem;
+    letter-spacing: 6px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+header h1 {
+    font-family: 'Sawarabi Mincho', serif;
+    font-size: 2.4rem;
+    color: #1a1a1a;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+}
+
+.tagline {
+    font-size: 0.38rem;
+    color: #888;
+    letter-spacing: 1px;
+    line-height: 2;
+}
+
+.profile-card {
+    border: 2px solid #1a1a1a;
+    background: #fff;
+    padding: 24px;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 0.5rem;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    color: #1a1a1a;
+}
+
+.img-frame {
+    border: 2px solid #1a1a1a;
+    display: inline-block;
+    padding: 4px;
+    margin-bottom: 20px;
+}
+
+#catImage.loading {
+    opacity: 0.3;
+}
+
+.profile-info {
+    text-align: left;
+    border-top: 1px solid #1a1a1a;
+    border-bottom: 1px solid #1a1a1a;
+    padding: 12px 0;
+    margin-bottom: 20px;
+}
+
+.profile-info p {
+    font-size: 0.45rem;
+    padding: 5px 0;
+    letter-spacing: 1px;
+    color: #1a1a1a;
+}
+
+.profile-info span {
+    color: #888;
+    margin-right: 12px;
+}
+
+#newCatBtn {
+    background: #1a1a1a;
+    border: 2px solid #1a1a1a;
+    color: #fdf6f0;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.5rem;
+    padding: 12px 24px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    transition: background 0.15s, color 0.15s;
+}
+
+#newCatBtn:hover {
+    background: #fdf6f0;
+    color: #1a1a1a;
+}
+
+#newCatBtn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
