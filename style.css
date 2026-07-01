@@ -1,7 +1,7 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
 }
 
 body {
@@ -15,109 +15,214 @@ body {
 }
 
 .container {
-    max-width: 420px;
+    max-width: 520px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
-header {
-    text-align: center;
-    margin-bottom: 32px;
-}
-
-.subtitle {
-    font-size: 0.45rem;
-    letter-spacing: 6px;
-    color: #888;
-    margin-bottom: 10px;
+header { 
+    text-align: center; 
 }
 
 header h1 {
     font-family: 'Sawarabi Mincho', serif;
     font-size: 2.4rem;
-    color: #1a1a1a;
     letter-spacing: 4px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    font-size: 0.45rem;
+    letter-spacing: 8px;
+    color: #888;
+    margin-bottom: 10px;
 }
 
 .tagline {
     font-size: 0.38rem;
     color: #888;
-    letter-spacing: 1px;
-    line-height: 2;
+    line-height: 2.4;
 }
 
-.profile-card {
+.card {
     border: 2px solid #1a1a1a;
     background: #fff;
     padding: 24px;
-    text-align: center;
 }
 
 .card-title {
-    font-size: 0.5rem;
+    font-size: 0.45rem;
     letter-spacing: 4px;
-    margin-bottom: 20px;
-    color: #1a1a1a;
+    margin-bottom: 16px;
 }
 
 .img-frame {
     border: 2px solid #1a1a1a;
     display: inline-block;
     padding: 4px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 #catImage {
-    width: 200px;
-    height: 200px;
+    width: 120px;
+    height: 120px;
     object-fit: cover;
     object-position: center;
     display: block;
-    margin: 0 auto;
 }
 
-#catImage.loading {
-    opacity: 0.3;
-}
-
-.profile-info {
-    text-align: left;
-    border-top: 1px solid #1a1a1a;
-    border-bottom: 1px solid #1a1a1a;
-    padding: 12px 0;
-    margin-bottom: 20px;
+.profile-info { 
+    margin-bottom: 16px; 
 }
 
 .profile-info p {
-    font-size: 0.45rem;
-    padding: 5px 0;
-    letter-spacing: 1px;
+    font-size: 0.4rem;
+    padding: 6px 0;
+    border-bottom: 1px dashed #eee;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-info span { 
+    color: #888; 
+    min-width: 44px; 
+}
+
+.editable {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.4rem;
+    border: none;
+    background: transparent;
     color: #1a1a1a;
+    outline: none;
+    border-bottom: 1px dashed #ccc;
+    width: 100%;
 }
 
-.profile-info span {
+.stats { 
+    margin-bottom: 16px; 
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 0.35rem;
+}
+
+.stat-row > span { 
+    min-width: 88px; 
+    color: #888; 
+}
+
+.bar {
+    flex: 1;
+    height: 6px;
+    background: #eee;
+    border: 1px solid #ccc;
+}
+
+.fill {
+    height: 100%;
+    background: #1a1a1a;
+    transition: width 0.4s ease;
+}
+
+.stat-row small { 
+    min-width: 24px; 
+    text-align: right; 
+    font-size: 0.35rem; 
+}
+
+.dream-goals p, .reputation p {
+    font-size: 0.4rem;
     color: #888;
-    margin-right: 12px;
+    padding: 4px 0;
+    line-height: 2;
 }
 
-#newCatBtn {
+#reputationTitle { 
+    color: #1a1a1a; 
+    font-size: 0.45rem; 
+}
+
+.country-info { 
+    margin-top: 16px; 
+}
+
+.country-info.hidden { 
+    display: none; 
+}
+
+.country-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+#countryFlag { 
+    font-size: 2rem; 
+}
+
+#countryName { 
+    font-size: 0.5rem; 
+    letter-spacing: 2px; 
+}
+
+.fact-grid p {
+    font-size: 0.38rem;
+    padding: 5px 0;
+    border-bottom: 1px dashed #eee;
+    display: flex;
+    gap: 10px;
+}
+
+.fact-grid p span:first-child { 
+    color: #888; 
+    min-width: 74px; 
+}
+
+.fun-fact {
+    margin: 14px 0;
+    font-size: 0.38rem;
+    line-height: 2.4;
+    color: #555;
+    border-left: 3px solid #1a1a1a;
+    padding-left: 12px;
+}
+
+button {
     background: #1a1a1a;
     border: 2px solid #1a1a1a;
     color: #fdf6f0;
     font-family: 'Press Start 2P', monospace;
-    font-size: 0.5rem;
+    font-size: 0.45rem;
     padding: 12px 24px;
     cursor: pointer;
     letter-spacing: 2px;
     transition: background 0.15s, color 0.15s;
+    width: 100%;
+    display: block;
+    margin-top: 12px;
 }
 
-#newCatBtn:hover {
-    background: #fdf6f0;
-    color: #1a1a1a;
+button:hover { 
+    background: #fdf6f0; 
+    color: #1a1a1a; 
 }
 
-#newCatBtn:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
+button:disabled { 
+    opacity: 0.4; 
+    cursor: not-allowed; 
+}
+
+.placeholder { 
+    font-size: 0.38rem; 
+    color: #bbb; 
+    line-height: 2; 
 }
