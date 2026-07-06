@@ -6,223 +6,164 @@
 
 body {
     background: #fdf6f0;
-    min-height: 100vh;
     font-family: 'Press Start 2P', monospace;
-    display: flex;
-    justify-content: center;
-    padding: 40px 16px;
     color: #1a1a1a;
+    min-height: 100vh;
 }
 
-.container {
-    max-width: 520px;
-    width: 100%;
+.screen {
+    display: none;
+    min-height: 100vh;
+}
+
+.screen.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#screen-loading {
+    background: #fdf6f0;
+}
+
+.loading-inner {
+    text-align: center;
+    padding: 40px 20px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
-}
-
-header { 
-    text-align: center; 
-}
-
-header h1 {
-    font-family: 'Sawarabi Mincho', serif;
-    font-size: 2.4rem;
-    letter-spacing: 4px;
-    margin-bottom: 6px;
-}
-
-.subtitle {
-    font-size: 0.45rem;
-    letter-spacing: 8px;
-    color: #888;
-    margin-bottom: 10px;
-}
-
-.tagline {
-    font-size: 0.38rem;
-    color: #888;
-    line-height: 2.4;
-}
-
-.card {
-    border: 2px solid #1a1a1a;
-    background: #fff;
-    padding: 24px;
-}
-
-.card-title {
-    font-size: 0.45rem;
-    letter-spacing: 4px;
-    margin-bottom: 16px;
-}
-
-.img-frame {
-    border: 2px solid #1a1a1a;
-    display: inline-block;
-    padding: 4px;
-    margin-bottom: 16px;
-}
-
-#catImage {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-}
-
-.profile-info { 
-    margin-bottom: 16px; 
-}
-
-.profile-info p {
-    font-size: 0.4rem;
-    padding: 6px 0;
-    border-bottom: 1px dashed #eee;
-    display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 16px;
 }
 
-.profile-info span { 
-    color: #888; 
-    min-width: 44px; 
-}
-
-.editable {
-    font-family: 'Press Start 2P', monospace;
-    font-size: 0.4rem;
-    border: none;
-    background: transparent;
-    color: #1a1a1a;
-    outline: none;
-    border-bottom: 1px dashed #ccc;
-    width: 100%;
-}
-
-.stats { 
-    margin-bottom: 16px; 
-}
-
-.stat-row {
+.paw-trail {
     display: flex;
-    align-items: center;
-    gap: 8px;
+    gap: 6px;
     margin-bottom: 8px;
-    font-size: 0.35rem;
 }
 
-.stat-row > span { 
-    min-width: 88px; 
-    color: #888; 
+.paw {
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: pawPop 1s ease-in-out infinite;
+    animation-delay: var(--d);
 }
 
-.bar {
-    flex: 1;
-    height: 6px;
-    background: #eee;
-    border: 1px solid #ccc;
+@keyframes pawPop {
+    0%, 100% {
+        opacity: 0;
+        transform: translateY(4px) scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(0px) scale(1.1);
+    }
 }
 
-.fill {
+.logo {
+    font-family: 'Sawarabi Mincho', serif;
+    font-size: 2.6rem;
+    letter-spacing: 6px;
+    line-height: 1.2;
+}
+
+.logo-sub {
+    font-size: 0.45rem;
+    letter-spacing: 10px;
+    color: #aaa;
+    margin-top: -8px;
+}
+
+.loading-bar-wrap {
+    width: 280px;
+    height: 12px;
+    border: 2px solid #1a1a1a;
+    position: relative;
+    background: #f0e8e0;
+}
+
+.loading-bar {
     height: 100%;
     background: #1a1a1a;
-    transition: width 0.4s ease;
+    width: 0%;
+    transition: width 0.35s ease;
 }
 
-.stat-row small { 
-    min-width: 24px; 
-    text-align: right; 
-    font-size: 0.35rem; 
+.loading-cat {
+    position: absolute;
+    top: -18px;
+    left: 0%;
+    font-size: 1.2rem;
+    transition: left 0.35s ease;
+    transform: translateX(-50%);
 }
 
-.dream-goals p, .reputation p {
-    font-size: 0.4rem;
-    color: #888;
-    padding: 4px 0;
-    line-height: 2;
-}
+@keyframes blink { 50% { opacity: 0; } }
 
-#reputationTitle { 
-    color: #1a1a1a; 
-    font-size: 0.45rem; 
-}
+#screen-select { background: #fdf6f0; }
 
-.country-info { 
-    margin-top: 16px; 
-}
-
-.country-info.hidden { 
-    display: none; 
-}
-
-.country-header {
+.select-inner {
+    text-align: center;
+    padding: 40px 20px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 14px;
-}
-
-#countryFlag { 
-    font-size: 2rem; 
-}
-
-#countryName { 
-    font-size: 0.5rem; 
-    letter-spacing: 2px; 
-}
-
-.fact-grid p {
-    font-size: 0.38rem;
-    padding: 5px 0;
-    border-bottom: 1px dashed #eee;
-    display: flex;
-    gap: 10px;
-}
-
-.fact-grid p span:first-child { 
-    color: #888; 
-    min-width: 74px; 
-}
-
-.fun-fact {
-    margin: 14px 0;
-    font-size: 0.38rem;
-    line-height: 2.4;
-    color: #555;
-    border-left: 3px solid #1a1a1a;
-    padding-left: 12px;
-}
-
-button {
-    background: #1a1a1a;
-    border: 2px solid #1a1a1a;
-    color: #fdf6f0;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 0.45rem;
-    padding: 12px 24px;
-    cursor: pointer;
-    letter-spacing: 2px;
-    transition: background 0.15s, color 0.15s;
+    gap: 20px;
     width: 100%;
-    display: block;
-    margin-top: 12px;
+    max-width: 860px;
 }
 
-button:hover { 
-    background: #fdf6f0; 
-    color: #1a1a1a; 
+.select-tagline {
+    font-size: 0.38rem;
+    color: #aaa;
+    letter-spacing: 3px;
 }
 
-button:disabled { 
-    opacity: 0.4; 
-    cursor: not-allowed; 
+.cat-picker {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-.placeholder { 
-    font-size: 0.38rem; 
-    color: #bbb; 
-    line-height: 2; 
+.cat-option {
+    border: 2px solid #ddd;
+    background: #fff;
+    padding: 20px 16px;
+    width: 200px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    text-align: center;
 }
+
+.cat-option:hover {
+    border-color: #1a1a1a;
+    transform: translateY(-6px);
+    box-shadow: 0 8px 0px #1a1a1a;
+}
+
+.cat-option.selected {
+    border-color: #1a1a1a;
+    transform: translateY(-6px);
+    box-shadow: 0 8px 0px #1a1a1a;
+    background: #fff8f4;
+}
+
+.cat-shine {
+    position: absolute;
+    top: -60%;
+    left: -60%;
+    width: 60%;
+    height: 200%;
+    background: rgba(255,255,255,0.4);
+    transform: rotate(25deg);
+    transition: left 0.4s ease;
+    pointer-events: none;
+}
+
+cat-option:hover .cat-shine {
+    left: 140%;
+}
+
