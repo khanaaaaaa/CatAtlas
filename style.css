@@ -151,19 +151,91 @@ body {
     background: #fff8f4;
 }
 
-.cat-shine {
+.cat-option::before {
+    content: '';
     position: absolute;
-    top: -60%;
-    left: -60%;
-    width: 60%;
+    top: -50%;
+    left: -70%;
+    width: 50%;
     height: 200%;
-    background: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.5);
     transform: rotate(25deg);
     transition: left 0.4s ease;
     pointer-events: none;
 }
 
-cat-option:hover .cat-shine {
+.cat-option:hover::before {
     left: 140%;
 }
 
+.cat-avatar {
+    width: 140px;
+    height: 140px;
+    border: 2px solid #1a1a1a;
+    overflow: hidden;
+    margin: 0 auto 14px;
+}
+
+.cat-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.cat-option:hover .cat-avatar img,
+.cat-option.selected .cat-avatar img {
+    transform: scale(1.08);
+}
+
+.cat-name {
+    font-size: 0.55rem;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+}
+
+.cat-desc {
+    font-size: 0.32rem;
+    color: #888;
+    line-height: 2.2;
+}
+
+.selected-preview {
+    font-size: 0.38rem;
+    color: #555;
+    letter-spacing: 1px;
+    line-height: 2.2;
+    border-left: 3px solid #1a1a1a;
+    padding-left: 14px;
+    text-align: left;
+    max-width: 500px;
+}
+
+.selected-previe.hidden {
+    display: none;
+}
+
+#selectCatBtn {
+    background: #1a1a1a;
+    border: 2px solid #1a1a1a;
+    color: #fdf6f0;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.5rem;
+    padding: 14px 36px;
+    cursor: pointer;
+    letter-spacing: 3px;
+    transition: background 0.15s, color 0.15s, transform 0.15s;
+}
+
+#selectCatBtn:hover:not(:disabled) {
+    background: #fdf6f0;
+    color: #1a1a1a;
+    transform: translateY(-2px);
+}
+
+#selectCatBtn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}

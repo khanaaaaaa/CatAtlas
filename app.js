@@ -57,4 +57,38 @@ window.addEventListener('load', () => {
             setTimeout(() => showScreen('screen-select'), 500);
         }
     }, 320);
+});
+
+const previews = {
+    mochi: 'Mochi has one brain cell. It dreams of tuna and distant mountains.',
+    soba: 'Soba has read every atlas ever printed. Twice.',
+    yuzu: 'Yuzu once jumped off a bookshelf just to see what would happen.'
+};
+
+let selectedCat = null;
+
+document.querySelectorAll('.cat-option').forEach(option => {
+    option.addEventListener('mouseenter', () => sfxHover());
+    option.addEventListener('click', () => {
+        document.querySelectorAll('.cat-option').forEach(o => o.classList.remove('selected'));
+        option.classList.add('selected');
+        sfxSelect();
+
+        selectedCat = {
+            name: option.dataset.cat.charAt(0).toUpperCase() + option.dataset.cat.slice(1),
+            key:  option.dataset.cat,
+            type: option.dataset.type,
+            food: option.dataset.food,
+            img:  option.dataset.img,
+        };
+
+        document.getElementById('previewText').textContent = previews[option.dataset.cat];
+        document.getElementById('selectedPreview').classList.remove('hidden');
+        document.getElementById('selectCatBtn').disabled = false;
+    });
+});
+
+document.getElementById('selectCatBtn').addEventListener('click', () => {
+    if (!selectedCat) return;
+    sfxStart();
 })
