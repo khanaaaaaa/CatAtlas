@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CatAtlas - Know Your Cat</title>
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="intro.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    </head>
+</html>
+
+    <div id="intro-screen">
+        <div id="map"></div>
+        <div id="map-overlay"></div>
+
+        <div id="country-fact" class="hidden">
+            <span id="fact-flag"></span>
+            <span id=fact-text></span>
+        </div>
+
+        <div id="cat-panel">
+            <div id="cat-frame">
+                <img id="cat-img" src="" alt="Your Cat">
+                <div id="cat-mood" class="hidden"></div>
+            </div>
+
+            <div id="dialogue-box">
+                <div id="dialoue-name"></div>
+                <p id="dialogue-text"></p>
+                <span class="cursor">▌</span>
+            </div>
+
+            <div id="dialogue-controls">
+                <button id="nextBtn">▶ NEXT</button>
+                <button id="skipBtn">SKIP ▶▶</button>
+            </div>
+
+            <div id="progress-dots"></div>
+
+        </div>
+        
+        <button id="enterBtn" class="hidden">▶ START EXPLORING</button>
+    </div>
+
+    <script src="intro.js"></script>
+</body>
+</html>
