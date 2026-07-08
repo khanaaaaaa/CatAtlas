@@ -142,3 +142,126 @@ body {
     to { transform: scale(1); }
 }
 
+#dialogue-box {
+    width: 100%;
+    background: rgba(253,246,240,0.96);
+    border: 2px solid #1a1a1a;
+    padding: 16px 18px;
+    position: relative;
+    min-height: 90px;
+}
+
+#dialogue box::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50px;
+    border: 8px solid transparent;
+    border-bottom-color: #1a1a1a;
+}
+
+#dialogue-box::after {
+    content: '';
+    position: absolute;
+    bottom: calc(100% - 2px);
+    left: 52px;
+    border: 6px solid transparent;
+    border-bottom-color: rgba(253,246,240,0.96);
+}
+
+#dialogue-name {
+    font-size: 0.4rem;
+    letter-spacing: 3px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+#dialogue-text {
+    font-size: 0.42rem;
+    line-height: 2.2;
+    color: #1a1a1a;
+    min-height: 40px;
+}
+
+.cursor {
+    animation: blink 0.8s step-start infinite;
+    font-size: 0.5rem;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+#dialogue-controls {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+#nextBtn, #skipBtn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.4rem;
+    padding: 10px 16px;
+    border: 2px solid #1a1a1a;
+    cursor: pointer;
+    letter-spacing: 2px;
+    transition: background 0.15s, color 0.15s;
+}
+
+#nextBtn {
+    background: transparent;
+    color: #aaa;
+    border-color: #ccc;
+}
+
+#skipBtn:hover {
+    color: #1a1a1a;
+    border-color: #1a1a1a;
+}
+
+#progress-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border: 1px solid #1a1a1a;
+    background: transparent;
+    transition: background 0.2s;
+}
+
+.dot.done { background: #1a1a1a; }
+
+#enterBtn {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.55rem;
+    padding: 16px 40px;
+    background: #1a1a1a;
+    color: #fdf6f0;
+    border: 2px solid #1a1a1a;
+    color: #fdf6f0;
+    border: 2px solid #1a1a1a;
+    cursor: pointer;
+    letter-spacing: 3px;
+    animation: pulse 1.2s ease-in-out infinite;
+    transition: background 0.15s, color 0.15s;
+}
+
+#enterBtn:hover { 
+    background: #fdf6f0;
+    color: #1a1a1a;
+}
+
+#enterBtn.hidden {
+    display: none;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(26,26,26,0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(26,26,26,0); }
+}
