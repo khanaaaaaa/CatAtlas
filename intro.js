@@ -3,31 +3,29 @@ if (!cat) window.location.href = 'index.html';
 
 const scripts = {
     mochi: [
-        { text: "Oh! A human! Are you here to take me on an adventure?"},
-        { text: "I've been staring at this map for THREE hours."},
-        { text: "I have one brain cell and it is FULLY dedicated to travel."},
-        { text: "See that map behind me? Every grey country is waiting for us."},
-        { text: "We're going to visit ALL of them. Even the tiny ones."},
-        { text: "Pack the tuna. We leave immediately."},
+        { text: "Oh! A human! Are you here to take me somewhere?",              anim: "excited" },
+        { text: "I have been staring at this map for three hours.",              anim: "nervous" },
+        { text: "I have one brain cell and it is fully dedicated to travel.",    anim: "excited" },
+        { text: "See all those countries back there? Every single one of them.", anim: "normal"  },
+        { text: "We are going to visit all of them. Even the tiny ones.",        anim: "excited" },
+        { text: "Tuna is packed. We leave right now.",                           anim: "excited" }
     ],
     soba: [
-        { text: "..."},
-        { text: "You're late. I've already memorized 47 countries."},
-        { text: "That map behind me?"},
-        { text: "I've studied every border, every capital."},
-        { text: "There are 195 countries, and we'll learn something from each one."},
-        { text: "The only rule that you must follow is that you NEVER touch my Salmon."},
-        { text: "Now, shall we begin?"},
-        { text: "I have a schedule."}
+        { text: "...",                                                                 anim: "normal"  },
+        { text: "You are late. I have already memorized 47 countries.",               anim: "normal"  },
+        { text: "That map behind us. I have studied every border. Every capital.",    anim: "normal"  },
+        { text: "195 countries. We will learn something real from each one.",         anim: "normal"  },
+        { text: "One rule. Do not touch my salmon.",                                  anim: "nervous" },
+        { text: "Good. Now let us begin. I have a schedule.",                         anim: "normal"  }
     ],
     yuzu: [
-        { text: "LETS GO!!!!"},
-        { text: "I've been waiting for THIS MOMENT my whole life!!"},
-        { text: "Look at that map!! SO MANY PLACES TO JUMP INTO!!"},
-        { text: "I once jumped off a bookshelf to see what would happen."},
-        { text: "It was amazing. This will be MORE amazing."},
-        { text: "CHICKEN SNACKS PACKED. LET'S GO!!!"}
-    ],
+        { text: "LETS GO!!",                                                           anim: "excited" },
+        { text: "I have been waiting for this my entire life!!",                       anim: "excited" },
+        { text: "Look at that map!! So many places!!",                                 anim: "excited" },
+        { text: "I once jumped off a bookshelf just to see what would happen.",        anim: "nervous" },
+        { text: "It was amazing. This is going to be even more amazing.",              anim: "excited" },
+        { text: "Chicken snacks are packed. Courage is at maximum. Lets go!!",        anim: "excited" }
+    ]
 };
 
 const lines = scripts[cat.key];
@@ -35,41 +33,70 @@ let lineIndex = 0;
 let typing = false;
 let typeTimer = null;
 
+let audioCtx;
+
+function getCtx() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    return audioCtx;
+}
+
+function playTone(freq, type, dur, vol) {
+    try {
+        const ac = getCtx();
+        const o  = ac.createOscillator();
+        const g  = ac.createGain();
+        o.connect(g);
+        g.connect(ac.destination);
+        o.type = type || 'sine';
+        o.frequency.setValueAtTime(freq, ac.currentTime);
+        g.gain.setValueAtTime(vol || 0.07, ac.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + (dur || 0.06));
+        o.start();
+        o.stop(ac.currentTime + (dur || 0.06));
+    } catch(e) {}
+}
+
 const map = L.map('map', {
     zoomControl: false,
     attributionControl: false,
     dragging: false,
     scrollWheelZoom: false,
     doubleClickZoom: false,
-    keyboard: false,
+    keyboard: false
 });
 
-L.titleLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    maxZoom: 5,
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    maxZoom: 5
 }).addTo(map);
 
 map.setView([20, 10], 2);
 
 let angle = 0;
 setInterval(() => {
-    angle += 0.015;
-    map.panTo([20 + Math.sin(angle) * 8, 10 + angle * 0.4], { animate: true, duration: 2 });
-}, 2000);
+    angle += 0.012;
+    map.panTo([20 + Math.sin(angle) * 6, 10 + angle * 0.3], { animate: true, duration: 2 });
+}, 2200);
 
-async function fetchRandomFact() {
+async function fetchFact() {
     try {
-        const res = await fetch('https://restcountries.com/v3.1/all?fields=name,flags,capital,population,region');
+        const res = await fetch('https://restcountries.com/v3.1/all?fields=name,capital,population');
         const all = await res.json();
-        const c = all[Math.floor(Math.random() * all.length)];
-        document.getElementById('fact-flag').textContent = c.flags?.emoji ?? '🏳';
+        const c   = all[Math.floor(Math.random() * all.length)];
+        const factEl = document.getElementById('country-fact');
         document.getElementById('fact-text').textContent =
-            `${c.name.common.toUpperCase()} — Capital: ${c.capital?.[0] ?? '?'} · Pop: ${c.population.toLocaleString()}`;
+            c.name.common.toUpperCase() + '  --  Capital: ' + (c.capital?.[0] ?? 'Unknown') + '  --  Pop: ' + c.population.toLocaleString();
+        factEl.classList.remove('hidden');
+        factEl.style.animation = 'none';
+        factEl.offsetHeight;
+        factEl.style.animation = '';
+    } catch(e) {
+        document.getElementById('fact-text').textContent = 'Loading world data...';
         document.getElementById('country-fact').classList.remove('hidden');
-    } catch { /* silent fail */ }
+    }
 }
 
-fetchRandomFact();
-setInterval(fetchRandomFact, 6000);
+fetchFact();
+setInterval(fetchFact, 6000);
 
 document.getElementById('cat-img').src = cat.img;
 document.getElementById('dialogue-name').textContent = cat.name.toUpperCase();
@@ -78,7 +105,7 @@ const dotsEl = document.getElementById('progress-dots');
 lines.forEach((_, i) => {
     const d = document.createElement('div');
     d.className = 'dot';
-    d.id = `dot-${i}`;
+    d.id = 'dot-' + i;
     dotsEl.appendChild(d);
 });
 
@@ -90,27 +117,26 @@ function typeLine(text) {
     clearInterval(typeTimer);
     typeTimer = setInterval(() => {
         el.textContent += text[i++];
-        if (i >= text.length) { clearInterval(typeTimer); typing = false; }
-    }, 36);
+        playTone(i % 2 === 0 ? 420 : 380, 'sine', 0.03, 0.04);
+        if (i >= text.length) {
+            clearInterval(typeTimer);
+            typing = false;
+        }
+    }, 38);
 }
 
 function showLine(index) {
     const line = lines[index];
 
-    const moodEl = document.getElementById('cat-mood');
-    moodEl.textContent = line.mood;
-    moodEl.classList.remove('hidden');
-    setTimeout(() => moodEl.classList.add('hidden'), 2000);
-
     const frame = document.getElementById('cat-frame');
-    frame.className = '';
-    frame.id = 'cat-frame';
+    frame.classList.remove('excited', 'nervous');
     if (line.anim === 'excited') frame.classList.add('excited');
     else if (line.anim === 'nervous') frame.classList.add('nervous');
 
     if (index === lines.length - 1) document.getElementById('map').classList.add('alive');
 
-    document.getElementById(`dot-${index}`)?.classList.add('done');
+    const dot = document.getElementById('dot-' + index);
+    if (dot) dot.classList.add('done');
 
     typeLine(line.text);
 }
@@ -134,8 +160,10 @@ document.getElementById('nextBtn').addEventListener('click', () => {
 
 document.getElementById('skipBtn').addEventListener('click', () => {
     clearInterval(typeTimer);
-    lineIndex = lines.length;
-    lines.forEach((_, i) => document.getElementById(`dot-${i}`)?.classList.add('done'));
+    lines.forEach((_, i) => {
+        const dot = document.getElementById('dot-' + i);
+        if (dot) dot.classList.add('done');
+    });
     document.getElementById('map').classList.add('alive');
     endIntro();
 });
@@ -149,21 +177,4 @@ document.getElementById('enterBtn').addEventListener('click', () => {
     window.location.href = 'game.html';
 });
 
-let audioCtx;
-function getCtx() {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    return audioCtx;
-}
-function playTone(freq, type = 'sine', dur = 0.08, vol = 0.1) {
-    const ac = getCtx();
-    const o  = ac.createOscillator();
-    const g  = ac.createGain();
-    o.connect(g); g.connect(ac.destination);
-    o.type = type;
-    o.frequency.setValueAtTime(freq, ac.currentTime);
-    g.gain.setValueAtTime(vol, ac.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + dur);
-    o.start(); o.stop(ac.currentTime + dur);
-}
-
-document.getElementById('nextBtn').addEventListener('mouseenter', () => playTone(480, 'sine', 0.05, 0.07));
+document.getElementById('nextBtn').addEventListener('mouseenter', () => playTone(500, 'sine', 0.05, 0.07));

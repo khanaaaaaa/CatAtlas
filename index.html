@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CatAtlas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,16 +12,16 @@
     <div id="screen-loading" class="screen active">
         <div class="loading-inner">
             <div class="paw-trail">
-                <span class="paw" style="--d:0s">ฅ</span>
-                <span class="paw" style="--d:0.2s">ฅ</span>
-                <span class="paw" style="--d:0.4s">ฅ</span>
-                <span class="paw" style="-d:0.6s">ฅ</span>
-                <span class="paw" style="--d:0.8s">ฅ</span>
+                <span class="paw" style="--d:0s">*</span>
+                <span class="paw" style="--d:0.2s">*</span>
+                <span class="paw" style="--d:0.4s">*</span>
+                <span class="paw" style="--d:0.6s">*</span>
+                <span class="paw" style="--d:0.8s">*</span>
             </div>
             <h1 class="logo">CAT ATLAS</h1>
             <div class="loading-bar-wrap">
                 <div class="loading-bar" id="loadingBar"></div>
-                <div class="loading-cat" id="loadingCat">⚞ • ⚟</div>
+                <div class="loading-cat" id="loadingCat">^.^</div>
             </div>
             <p class="loading-text" id="loadingText">LOADING...</p>
         </div>
@@ -30,35 +30,37 @@
     <div id="screen-select" class="screen">
         <div class="select-inner">
             <h1 class="logo">CAT ATLAS</h1>
-            <p class="tagline">— choose your travel companion —</p>
+            <p class="tagline">choose your travel companion</p>
             <div class="cat-picker">
                 <div class="cat-option" data-cat="mochi" data-type="Adventurous" data-food="Tuna" data-img="mochi.png">
                     <div class="cat-avatar">
                         <img src="mochi.png" alt="Mochi">
                     </div>
                     <p class="cat-name">MOCHI</p>
-                    <p class="cat-desc">Adventurous · Loves Tuna</p>
+                    <p class="cat-desc">Adventurous</p>
+                    <p class="cat-desc">Loves Tuna</p>
                 </div>
                 <div class="cat-option" data-cat="soba" data-type="Curious" data-food="Salmon" data-img="soba.png">
                     <div class="cat-avatar">
                         <img src="soba.png" alt="Soba">
                     </div>
                     <p class="cat-name">SOBA</p>
-                    <p class="cat-desc">Curious · Loves Salmon</p>
+                    <p class="cat-desc">Curious</p>
+                    <p class="cat-desc">Loves Salmon</p>
                 </div>
                 <div class="cat-option" data-cat="yuzu" data-type="Brave" data-food="Chicken" data-img="yuzu.png">
                     <div class="cat-avatar">
                         <img src="yuzu.png" alt="Yuzu">
                     </div>
                     <p class="cat-name">YUZU</p>
-                    <p class="cat-desc">Brave · Loves Chicken</p>
+                    <p class="cat-desc">Brave</p>
+                    <p class="cat-desc">Loves Chicken</p>
                 </div>
             </div>
             <div id="selectedPreview" class="selected-preview hidden">
                 <p id="previewText"></p>
             </div>
-
-            <button id="selectCatBtn" disabled>▶ BEGIN JOURNEY</button>
+            <button id="selectCatBtn" disabled>BEGIN JOURNEY</button>
         </div>
     </div>
 
