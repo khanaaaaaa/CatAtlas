@@ -91,4 +91,6 @@ document.querySelectorAll('.cat-option').forEach(option => {
 document.getElementById('selectCatBtn').addEventListener('click', () => {
     if (!selectedCat) return;
     sfxStart();
+    sessionStorage.setItem('selectedCat', JSON.stringify(selectedCat));
+    setTimeout(() => window.location.href = 'intro.html', 400);
 })

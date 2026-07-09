@@ -117,3 +117,53 @@ function showLine(index) {
 
 showLine(0);
 
+document.getElementById('nextBtn').addEventListener('click', () => {
+    if (typing) {
+        clearInterval(typeTimer);
+        document.getElementById('dialogue-text').textContent = lines[lineIndex].text;
+        typing = false;
+        return;
+    }
+    lineIndex++;
+    if (lineIndex < lines.length) {
+        showLine(lineIndex);
+    } else {
+        endIntro();
+    }
+});
+
+document.getElementById('skipBtn').addEventListener('click', () => {
+    clearInterval(typeTimer);
+    lineIndex = lines.length;
+    lines.forEach((_, i) => document.getElementById(`dot-${i}`)?.classList.add('done'));
+    document.getElementById('map').classList.add('alive');
+    endIntro();
+});
+
+function endIntro() {
+    document.getElementById('cat-panel').style.display = 'none';
+    document.getElementById('enterBtn').classList.remove('hidden');
+}
+
+document.getElementById('enterBtn').addEventListener('click', () => {
+    window.location.href = 'game.html';
+});
+
+let audioCtx;
+function getCtx() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    return audioCtx;
+}
+function playTone(freq, type = 'sine', dur = 0.08, vol = 0.1) {
+    const ac = getCtx();
+    const o  = ac.createOscillator();
+    const g  = ac.createGain();
+    o.connect(g); g.connect(ac.destination);
+    o.type = type;
+    o.frequency.setValueAtTime(freq, ac.currentTime);
+    g.gain.setValueAtTime(vol, ac.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + dur);
+    o.start(); o.stop(ac.currentTime + dur);
+}
+
+document.getElementById('nextBtn').addEventListener('mouseenter', () => playTone(480, 'sine', 0.05, 0.07));
