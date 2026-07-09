@@ -1,0 +1,334 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: #fdf6f0;
+    font-family: 'Press Start 2P', monospace;
+    color: #1a1a1a;
+    min-height: 100vh;
+    padding-top: 64px;
+}
+
+#cat-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: #fdf6f0;
+    border-bottom: 2px solid #1a1a1a;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+}
+
+#bar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#bar-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border: 2px solid #1a1a1a;
+    display: block;
+}
+
+#bar-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#bar-name {
+    font-size: 0.45rem;
+    letter-spacing: 2px;
+}
+
+#bar-rep {
+    font-size: 0.3rem;
+    color: #888;
+    letter-spacing: 1px;
+}
+
+#bar-stats {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.mini-stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.3rem;
+    color: #888;
+}
+
+.mini-bar {
+    width: 60px;
+    height: 5px;
+    background: #eee;
+    border: 1px solid #ccc;
+}
+
+.mini-fill {
+    height: 100%;
+    background: #1a1a1a;
+    transition: width 0.4s ease;
+}
+
+#tip-box {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    background: #fff;
+    border: 2px solid #1a1a1a;
+    box-shadow: 4px 4px 0 #1a1a1a;
+    padding: 16px 20px;
+    max-width: 480px;
+    width: calc(100% - 48px);
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+#tip-box.hidden { display: none; }
+
+#tip-img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border: 2px solid #1a1a1a;
+    flex-shrink: 0;
+}
+
+#tip-text {
+    font-size: 0.38rem;
+    line-height: 2.2;
+    flex: 1;
+}
+
+#tip-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.35rem;
+    padding: 8px 14px;
+    background: #1a1a1a;
+    color: #fdf6f0;
+    border: 2px solid #1a1a1a;
+    cursor: pointer;
+    letter-spacing: 1px;
+    align-self: flex-end;
+    flex-shrink: 0;
+    transition: background 0.15s, color 0.15s;
+}
+
+#tip-btn:over { background: #fdf6f0; color: #1a1a1a; }
+
+#game-content {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    border: 2px solid #1a1a1a;
+    background: #fff;
+    padding: 24px;
+}
+
+.card-title {
+    font-size: 0.4rem;
+    letter-spacing: 4px;
+    margin-bottom: 16px;
+    color: #888;
+}
+
+#profile-top {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.img-frame {
+    border: 2px solid #1a1a1a;
+    padding: 4px;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.ing-frame img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    display: block;
+}
+
+.img-frame label {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.28rem;
+    color: #888;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+.img-frame label:hover { color: #1a1a1a; }
+.img-frame input { display: none; }
+
+#profile-fields {
+    flex: 1;
+}
+
+#profile fields p {
+    font-size: 0.38rem;
+    padding: 6px 0;
+    border-bottom: 1px dashed #eee;
+    display: flex;
+    gap: 10px;
+}
+
+#profile-fields span:first-child { color: #aaa; min-width: 48px; }
+
+#stats { margin-bottom: 4px; }
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 0.32rem;
+}
+
+.stat-row > span { min-width: 80px; color: #aaa; }
+
+.bar {
+    flex: 1;
+    height: 6px;
+    background: #eee;
+    border: 1px solid #ddd;
+}
+
+.fill {
+    height: 100%;
+    background: #1a1a1a;
+    transition: width 0.4s ease;
+}
+
+.stat-row small { font-size: 0.32rem; min-width: 20px; text-align: right; }
+
+#goals p, #reputation p {
+    font-size: 0.38rem;
+    color: #aaa;
+    padding: 4px 0;
+    line-height: 2;
+}
+
+#rep-title { color: #1a1a1a; font-size: 0.42rem; }
+
+#country-info { margin-top: 16px; }
+#country-info.hidden { display: none; }
+
+#country-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+#c-flag { font-size: 2rem; }
+#c-name { font-size: 0.48rem; letter-spacing: 2px; }
+
+#fact-grid p {
+    font-size: 0.35rem;
+    padding: 5px 0;
+    border-bottom: 1px dashed #eee;
+    display: flex;
+    gap: 10px;
+}
+
+#faxt-grid p span:first-child { color: #aaa; min-width: 90px; }
+
+#fun-fact {
+    margin: 14px 0;
+    font-size: 0.35rem;
+    line-height: 2.4;
+    color: #555;
+    border-left: 3px solid #1a1a1a;
+    padding-left: 12px;
+}
+
+#challenge-box { font-size: 0.38rem; }
+
+.challenge-q {
+    line-height: 2.2;
+    margin-bottom: 14px;
+    color: #1a1a1a;
+}
+
+.challenge-opts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.challenge-opts button {
+    text-align: left;
+    font-size: 0.35rem;
+    padding: 10px 14px;
+    background: #fdf6f0;
+    color: #1a1a1a;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: background 0.15s, border-color 0.15s;
+    width: 100%;
+    font-family: 'Press Start 2P', monospace;
+}
+
+.challenge-opts button:hover { background: #f0e8e0; border-color: #1a1a1a; }
+.challenge-opts button.correct { background: #e8f5e9; border-color: #1a1a1a; }
+.challenge-opts button.wrong { background: #fce4e4; border-color: #1a1a1a; }
+
+#map-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.map-dot {
+    font-size: 0.3rem;
+    border: 1px solid #1a1a1a;
+    padding: 4px 7px;
+    letter-spacing: 1px;
+    background: #fff;
+    transition: background 0.2s;
+}
+
+.map-dot:hover { background: #f0e8e0; }
+
+#stamps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.stamp {
+    border: 2px solid #1a1a1a;
+    padding: 8px 10px;
+    font-size: 0.3rem;
+    letter-spacing: 1px;
+    text-align: center;
+    line-height: 2;
+}
