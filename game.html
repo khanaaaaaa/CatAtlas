@@ -68,6 +68,65 @@
                 <p id="rep-title">Local Tourist</p>
             </div>
         </section>
+        <section class="card" id="section-explore">
+            <div class="card-title">EXPLORE THE WORLD</div>
+            <button id="spin-btn">SPIN THE GLOBE</button>
+            <div id="country-info" class="hidden">
+                <div id="country-header">
+                    <span id="c-flag"></span>
+                    <strong id="c-name"></strong>
+                </div>
+                <div id="fact-grid">
+                    <p><span>CAPITAL</span><span id="c-capital"></span></p>
+                    <p><span>REGION</span><span id="c-region"></span></p>
+                    <p><span>POPULATION</span><span id="c-pop"></span></p>
+                    <p><span>LANGUAGE</span><span id="c-lang"></span></p>
+                    <p><span>CURRENCY</span><span id="c-currency"></span></p>
+                    <p><span>AREA</span><span id="c-area"></span></p>
+                    <p><span>BORDERS</span><span id="c-borders"></span></p>
+                    <p><span>TIMEZONE</span><span id="c-timezone"></span></p>
+                </div>
+                <div id="fun-fact"></div>
+                <button id="visit-btn">VISIT THIS COUNTRY</button>
+            </div>
+        </section>
+
+        <section class="card" id="section-challenge">
+            <div class="card-title">MINI CHALLENGE</div>
+            <div id="challenge-box">
+                <p class="placeholder">Explore a country to unlock a challenge</p>
+            </div>
+        </section>
+
+        <section class="card" id="section-map">
+            <div class="card-title">WORLD MAP</div>
+            <p id="passport-empty" empty="placeholder">Your scrapbook is empty.</p>
+            <div id="scrapbook-pages"></div>
+        </section>
+
+        <section class="card" id="section-passport">
+            <div class="card-title">WORLD MAP</div>
+            <p id="map-count" class="placeholder">0 countries visited.</p>
+            <div id="map-grid"></div>
+        </section>
+
+        <section class="card" id="section-scrapbook">
+            <div class="card-title">SCRAPBOOK</div>
+            <p id="scrapbook-empty" class="placeholder">Your scrapbook is empty.</p>
+            <div id="souvenir-grid"></div>
+        </section>
+
+        <section class="card" id="section-achievements">
+            <div class="card-title">ACHIEVEMENTS</div>
+            <div class="ach locked" id="ach-first">[ ] First Trip</div>
+            <div class="ach locked" id="ach-mountain">[ ] Mountain Explorer</div>
+            <div class="ach locked" id="ach-food">[ ] International Food Critic</div>
+            <div class="ach locked" id="ach-25">[ ] Visited 25 Countries</div>
+            <div class="ach locked" id="ach-continent">[ ] Visited Every Continent</div>
+        </section>
+
     </div>
+
+    <script src="game.js"></script>
 </body>
 </html>
