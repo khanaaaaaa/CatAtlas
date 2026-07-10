@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="game.css">
 </head>
 <body>
+
     <div id="cat-bar">
         <div id="bar-left">
             <img id="bar-img" src="" alt="cat">
@@ -19,11 +20,11 @@
         <div id="bar-stats">
             <div class="mini-stat">
                 <span>KNW</span>
-                <div class="mini-bar"><div class="mini-fill" id="bar-knowledge" style="width:0%"></div>
+                <div class="mini-bar"><div class="mini-fill" id="bar-knowledge" style="width:0%"></div></div>
             </div>
             <div class="mini-stat">
                 <span>TRIPS</span>
-                <div class="mini-bar"><div class="mini-fill" id="ar-trips" style="width:0%"></div></div>
+                <div class="mini-bar"><div class="mini-fill" id="bar-trips" style="width:0%"></div></div>
             </div>
         </div>
     </div>
@@ -60,7 +61,7 @@
             <div id="goals">
                 <div class="card-title" style="margin-top:16px">DREAM GOALS</div>
                 <p id="goal-1">[ ] See the Northern Lights</p>
-                <p id="goal-1">[ ] Climb a mountain</p>
+                <p id="goal-2">[ ] Climb a mountain</p>
                 <p id="goal-3">[ ] Ride a train</p>
             </div>
             <div id="reputation">
@@ -68,6 +69,7 @@
                 <p id="rep-title">Local Tourist</p>
             </div>
         </section>
+
         <section class="card" id="section-explore">
             <div class="card-title">EXPLORE THE WORLD</div>
             <button id="spin-btn">SPIN THE GLOBE</button>
@@ -94,25 +96,31 @@
         <section class="card" id="section-challenge">
             <div class="card-title">MINI CHALLENGE</div>
             <div id="challenge-box">
-                <p class="placeholder">Explore a country to unlock a challenge</p>
+                <p class="placeholder">Explore a country to unlock a challenge.</p>
             </div>
         </section>
 
         <section class="card" id="section-map">
             <div class="card-title">WORLD MAP</div>
-            <p id="passport-empty" empty="placeholder">Your scrapbook is empty.</p>
-            <div id="scrapbook-pages"></div>
+            <p id="map-count" class="placeholder">0 countries visited.</p>
+            <div id="map-grid"></div>
         </section>
 
         <section class="card" id="section-passport">
-            <div class="card-title">WORLD MAP</div>
-            <p id="map-count" class="placeholder">0 countries visited.</p>
-            <div id="map-grid"></div>
+            <div class="card-title">PASSPORT</div>
+            <p id="passport-empty" class="placeholder">No stamps yet.</p>
+            <div id="stamps"></div>
         </section>
 
         <section class="card" id="section-scrapbook">
             <div class="card-title">SCRAPBOOK</div>
             <p id="scrapbook-empty" class="placeholder">Your scrapbook is empty.</p>
+            <div id="scrapbook-pages"></div>
+        </section>
+
+        <section class="card" id="section-souvenirs">
+            <div class="card-title">SOUVENIR COLLECTION</div>
+            <p id="souvenir-empty" class="placeholder">No souvenirs yet.</p>
             <div id="souvenir-grid"></div>
         </section>
 
