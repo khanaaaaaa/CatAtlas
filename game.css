@@ -125,10 +125,12 @@ body {
     letter-spacing: 1px;
     align-self: flex-end;
     flex-shrink: 0;
+    width: auto;
+    margin-top: 0;
     transition: background 0.15s, color 0.15s;
 }
 
-#tip-btn:over { background: #fdf6f0; color: #1a1a1a; }
+#tip-btn:hover { background: #fdf6f0; color: #1a1a1a; }
 
 #game-content {
     max-width: 560px;
@@ -166,7 +168,7 @@ body {
     text-align: center;
 }
 
-.ing-frame img {
+.img-frame img {
     width: 100px;
     height: 100px;
     object-fit: cover;
@@ -185,11 +187,9 @@ body {
 .img-frame label:hover { color: #1a1a1a; }
 .img-frame input { display: none; }
 
-#profile-fields {
-    flex: 1;
-}
+#profile-fields { flex: 1; }
 
-#profile fields p {
+#profile-fields p {
     font-size: 0.38rem;
     padding: 6px 0;
     border-bottom: 1px dashed #eee;
@@ -245,7 +245,7 @@ body {
     margin-bottom: 14px;
 }
 
-#c-flag { font-size: 2rem; }
+#c-flag { font-size: 0.5rem; font-weight: bold; background: #1a1a1a; color: #fdf6f0; padding: 4px 7px; letter-spacing: 2px; }
 #c-name { font-size: 0.48rem; letter-spacing: 2px; }
 
 #fact-grid p {
@@ -256,7 +256,7 @@ body {
     gap: 10px;
 }
 
-#faxt-grid p span:first-child { color: #aaa; min-width: 90px; }
+#fact-grid p span:first-child { color: #aaa; min-width: 90px; }
 
 #fun-fact {
     margin: 14px 0;
@@ -290,14 +290,15 @@ body {
     border: 1px solid #ccc;
     cursor: pointer;
     letter-spacing: 1px;
-    transition: background 0.15s, border-color 0.15s;
     width: 100%;
+    margin-top: 0;
     font-family: 'Press Start 2P', monospace;
+    transition: background 0.15s, border-color 0.15s;
 }
 
 .challenge-opts button:hover { background: #f0e8e0; border-color: #1a1a1a; }
 .challenge-opts button.correct { background: #e8f5e9; border-color: #1a1a1a; }
-.challenge-opts button.wrong { background: #fce4e4; border-color: #1a1a1a; }
+.challenge-opts button.wrong   { background: #fce4e4; border-color: #1a1a1a; }
 
 #map-grid {
     display: flex;

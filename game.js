@@ -98,42 +98,65 @@ function nextTip() {
 
 get('tip-btn').addEventListener('click', () => { tipStep++; nextTip(); });
 
-get('spin-btn').addEventListener('click', async () => {
+const countries = [
+    { name:'Japan',       capital:'Tokyo',          region:'Asia',          pop:'125,700,000', lang:'Japanese',          currency:'Yen (JPY)',            area:'377,975 km2',  borders:4,  tz:'UTC+09:00', fact:'Japan has the world\'s oldest company, founded in 578 AD.' },
+    { name:'France',      capital:'Paris',          region:'Europe',        pop:'67,400,000',  lang:'French',            currency:'Euro (EUR)',           area:'551,695 km2',  borders:8,  tz:'UTC+01:00', fact:'France is the most visited country in the world.' },
+    { name:'Brazil',      capital:'Brasilia',       region:'Americas',      pop:'214,300,000', lang:'Portuguese',        currency:'Real (BRL)',           area:'8,515,767 km2',borders:10, tz:'UTC-03:00', fact:'Brazil contains 60% of the Amazon rainforest.' },
+    { name:'Egypt',       capital:'Cairo',          region:'Africa',        pop:'102,300,000', lang:'Arabic',            currency:'Pound (EGP)',          area:'1,002,450 km2',borders:4,  tz:'UTC+02:00', fact:'Egypt has more ancient monuments than any other country.' },
+    { name:'Canada',      capital:'Ottawa',         region:'Americas',      pop:'38,200,000',  lang:'English, French',   currency:'Dollar (CAD)',         area:'9,984,670 km2',borders:1,  tz:'UTC-05:00', fact:'Canada has the longest coastline of any country.' },
+    { name:'Australia',   capital:'Canberra',       region:'Oceania',       pop:'25,700,000',  lang:'English',           currency:'Dollar (AUD)',         area:'7,692,024 km2',borders:0,  tz:'UTC+10:00', fact:'Australia is the only country that is also a continent.' },
+    { name:'India',       capital:'New Delhi',      region:'Asia',          pop:'1,380,000,000',lang:'Hindi, English',   currency:'Rupee (INR)',          area:'3,287,263 km2',borders:6,  tz:'UTC+05:30', fact:'India invented the number zero and chess.' },
+    { name:'Italy',       capital:'Rome',           region:'Europe',        pop:'60,300,000',  lang:'Italian',           currency:'Euro (EUR)',           area:'301,340 km2',  borders:6,  tz:'UTC+01:00', fact:'Italy has more UNESCO World Heritage Sites than any other country.' },
+    { name:'Mexico',      capital:'Mexico City',    region:'Americas',      pop:'128,900,000', lang:'Spanish',           currency:'Peso (MXN)',           area:'1,964,375 km2',borders:3,  tz:'UTC-06:00', fact:'Mexico City is built on the ruins of the Aztec capital Tenochtitlan.' },
+    { name:'Norway',      capital:'Oslo',           region:'Europe',        pop:'5,400,000',   lang:'Norwegian',         currency:'Krone (NOK)',          area:'323,802 km2',  borders:3,  tz:'UTC+01:00', fact:'Norway has the longest road tunnel in the world at 24.5 km.' },
+    { name:'Nepal',       capital:'Kathmandu',      region:'Asia',          pop:'29,100,000',  lang:'Nepali',            currency:'Rupee (NPR)',          area:'147,181 km2',  borders:2,  tz:'UTC+05:45', fact:'Nepal is home to 8 of the world\'s 10 tallest mountains.' },
+    { name:'Iceland',     capital:'Reykjavik',      region:'Europe',        pop:'370,000',     lang:'Icelandic',         currency:'Krona (ISK)',          area:'103,000 km2',  borders:0,  tz:'UTC+00:00', fact:'Iceland runs on nearly 100% renewable energy.' },
+    { name:'Greece',      capital:'Athens',         region:'Europe',        pop:'10,700,000',  lang:'Greek',             currency:'Euro (EUR)',           area:'131,957 km2',  borders:4,  tz:'UTC+02:00', fact:'Greece has the longest coastline in Europe.' },
+    { name:'China',       capital:'Beijing',        region:'Asia',          pop:'1,412,000,000',lang:'Mandarin',         currency:'Yuan (CNY)',           area:'9,596,960 km2',borders:14, tz:'UTC+08:00', fact:'China borders more countries than any other nation.' },
+    { name:'Peru',        capital:'Lima',           region:'Americas',      pop:'32,900,000',  lang:'Spanish',           currency:'Sol (PEN)',            area:'1,285,216 km2',borders:5,  tz:'UTC-05:00', fact:'Machu Picchu sits at 2,430 metres above sea level.' },
+    { name:'Morocco',     capital:'Rabat',          region:'Africa',        pop:'37,100,000',  lang:'Arabic, Berber',    currency:'Dirham (MAD)',         area:'446,550 km2',  borders:2,  tz:'UTC+01:00', fact:'Morocco is the only African country with coasts on two seas.' },
+    { name:'Argentina',   capital:'Buenos Aires',   region:'Americas',      pop:'45,600,000',  lang:'Spanish',           currency:'Peso (ARS)',           area:'2,780,400 km2',borders:5,  tz:'UTC-03:00', fact:'Argentina is the 8th largest country in the world.' },
+    { name:'Thailand',    capital:'Bangkok',        region:'Asia',          pop:'71,600,000',  lang:'Thai',              currency:'Baht (THB)',           area:'513,120 km2',  borders:5,  tz:'UTC+07:00', fact:'Thailand is the only Southeast Asian country never colonised.' },
+    { name:'Portugal',    capital:'Lisbon',         region:'Europe',        pop:'10,300,000',  lang:'Portuguese',        currency:'Euro (EUR)',           area:'92,212 km2',   borders:1,  tz:'UTC+00:00', fact:'Portugal is the oldest nation-state in Europe, founded in 1143.' },
+    { name:'New Zealand', capital:'Wellington',     region:'Oceania',       pop:'5,100,000',   lang:'English, Maori',    currency:'Dollar (NZD)',         area:'270,467 km2',  borders:0,  tz:'UTC+12:00', fact:'New Zealand was the first country to give women the right to vote.' },
+    { name:'South Korea', capital:'Seoul',          region:'Asia',          pop:'51,700,000',  lang:'Korean',            currency:'Won (KRW)',            area:'100,210 km2',  borders:1,  tz:'UTC+09:00', fact:'South Korea has the fastest average internet speed in the world.' },
+    { name:'Kenya',       capital:'Nairobi',        region:'Africa',        pop:'54,000,000',  lang:'Swahili, English',  currency:'Shilling (KES)',       area:'580,367 km2',  borders:5,  tz:'UTC+03:00', fact:'Kenya is home to the Great Rift Valley.' },
+    { name:'Sweden',      capital:'Stockholm',      region:'Europe',        pop:'10,400,000',  lang:'Swedish',           currency:'Krona (SEK)',          area:'450,295 km2',  borders:2,  tz:'UTC+01:00', fact:'Sweden has more islands than any other country in the world.' },
+    { name:'Turkey',      capital:'Ankara',         region:'Asia',          pop:'84,300,000',  lang:'Turkish',           currency:'Lira (TRY)',           area:'783,562 km2',  borders:8,  tz:'UTC+03:00', fact:'Turkey is home to the oldest known temple, Gobekli Tepe.' },
+    { name:'Colombia',    capital:'Bogota',         region:'Americas',      pop:'51,200,000',  lang:'Spanish',           currency:'Peso (COP)',           area:'1,141,748 km2',borders:5,  tz:'UTC-05:00', fact:'Colombia is the only country in South America with coasts on two oceans.' },
+    { name:'Nigeria',     capital:'Abuja',          region:'Africa',        pop:'211,400,000', lang:'English',           currency:'Naira (NGN)',          area:'923,768 km2',  borders:4,  tz:'UTC+01:00', fact:'Nigeria is the most populous country in Africa.' },
+    { name:'Germany',     capital:'Berlin',         region:'Europe',        pop:'83,200,000',  lang:'German',            currency:'Euro (EUR)',           area:'357,114 km2',  borders:9,  tz:'UTC+01:00', fact:'Germany has over 1,500 different types of beer.' },
+    { name:'Spain',       capital:'Madrid',         region:'Europe',        pop:'47,400,000',  lang:'Spanish',           currency:'Euro (EUR)',           area:'505,990 km2',  borders:5,  tz:'UTC+01:00', fact:'Spain is the second largest country in the European Union.' },
+    { name:'Indonesia',   capital:'Jakarta',        region:'Asia',          pop:'273,500,000', lang:'Indonesian',        currency:'Rupiah (IDR)',         area:'1,904,569 km2',borders:3,  tz:'UTC+07:00', fact:'Indonesia is the world\'s largest archipelago with over 17,000 islands.' },
+    { name:'South Africa',capital:'Pretoria',       region:'Africa',        pop:'60,000,000',  lang:'Zulu, Xhosa, Afrikaans',currency:'Rand (ZAR)',      area:'1,219,090 km2',borders:6,  tz:'UTC+02:00', fact:'South Africa has three capital cities.' }
+];
+
+get('spin-btn').addEventListener('click', () => {
     const btn = get('spin-btn');
     btn.disabled = true;
     btn.textContent = 'SPINNING...';
     tone(300,'sine',0.06,0.08);
-    try {
-        const res = await fetch('https://restcountries.com/v3.1/all?fields=name,capital,population,languages,currencies,flags,region,area,borders,timezones');
-        const all = await res.json();
-        const c   = all[Math.floor(Math.random() * all.length)];
-        currentCountry = c.name.common;
 
-        set('c-flag',     c.flags?.emoji ?? '');
+    setTimeout(() => {
+        const c = countries[Math.floor(Math.random() * countries.length)];
+        currentCountry = c.name;
+
+        set('c-flag',   c.name.slice(0,2).toUpperCase());
         set('c-name',     currentCountry.toUpperCase());
-        set('c-capital',  c.capital?.[0] ?? 'Unknown');
-        set('c-region',   c.region ?? 'Unknown');
-        set('c-pop',      c.population.toLocaleString());
-        set('c-lang',     Object.values(c.languages ?? {}).join(', ') || 'Unknown');
-        set('c-currency', Object.values(c.currencies ?? {}).map(x => x.name + ' (' + x.symbol + ')').join(', ') || 'Unknown');
-        set('c-area',     c.area ? c.area.toLocaleString() + ' km2' : 'Unknown');
-        set('c-borders',  c.borders?.length ? c.borders.length + ' countries' : 'None');
-        set('c-timezone', c.timezones?.[0] ?? 'Unknown');
-
-        const facts = [];
-        if (c.borders?.length)        facts.push(currentCountry + ' shares borders with ' + c.borders.length + ' countries.');
-        if (c.timezones?.length > 1)  facts.push('It spans ' + c.timezones.length + ' timezones.');
-        if (c.population > 100000000) facts.push('Over ' + Math.floor(c.population/1000000) + ' million people live here.');
-        if (c.area > 1000000)         facts.push('It covers over ' + Math.floor(c.area/1000000) + ' million km2.');
-        set('fun-fact', facts.length ? facts.join(' ') : currentCountry + ' is a fascinating country waiting to be explored.');
+        set('c-capital',  c.capital);
+        set('c-region',   c.region);
+        set('c-pop',      c.pop);
+        set('c-lang',     c.lang);
+        set('c-currency', c.currency);
+        set('c-area',     c.area);
+        set('c-borders',  c.borders ? c.borders + ' countries' : 'None');
+        set('c-timezone', c.tz);
+        set('fun-fact',   c.fact);
 
         get('country-info').classList.remove('hidden');
-    } catch(e) {
-        alert('Could not fetch country. Check your connection.');
-    } finally {
         btn.disabled = false;
         btn.textContent = 'SPIN THE GLOBE';
-    }
+    }, 600);
 });
 
 get('visit-btn').addEventListener('click', () => {
@@ -165,7 +188,7 @@ get('visit-btn').addEventListener('click', () => {
     get('passport-empty').style.display = 'none';
     const stamp = document.createElement('div');
     stamp.className = 'stamp';
-    stamp.innerHTML = get('c-flag').textContent + '<br>' + (get('c-capital').textContent || currentCountry).toUpperCase();
+    stamp.innerHTML = '<span>' + get('c-flag').textContent + '</span><br>' + (get('c-capital').textContent || currentCountry).toUpperCase();
     get('stamps').appendChild(stamp);
 
     get('scrapbook-empty').style.display = 'none';
