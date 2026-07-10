@@ -163,3 +163,66 @@ document.getElementById('spin-btn').addEventListener('click', async () => {
         alert('Could not fetch country')
     }
 });
+
+get('visit-btn').addEventListener('click', () => {
+    if (!curentCountry || visited.includes(currentCountry)) return;
+    visited.push(currentCountry);
+    regions.add(get('c-region').textContent);
+    tone(440,'sine',0.1,0.1); setTimeout(()=>tone(550,0.1,0.1),60); setTimeout(()=>tone(660,'sine',0.1,0.1),120);
+
+    set('p-trips', visited.length);
+    knowledge = Math.min(100, knowledge + 10);
+    get('knowledge-fill').style.width = knowledge + '%';
+    set('knowledge-val', knowledge);
+    get('bar-knowledge').style.width = knowledge + '%';
+    get('bar-trips').style.width = Math.min((visited.length/195)*100, 100) + '%';
+
+    const rep = reputations[Math.min(Math.floor(visited.length/5), reputation.length-1)];
+    set('rep-title', rep);
+    set('bar-rep', rep);
+
+    set('map-count', visited.length + ' countries visited.');
+    const dot = document.createElement('div');
+    dot.className = 'map-dot';
+    dot.textContent = currentCountry.slice(0,3).toUpperCase();
+    dot.title = currentCountry;
+    get('map-grid').appendChild(dot);
+
+    get('passport-empty').style.display = 'none';
+    const stamp = document.createElement('div');
+    stamp.className = 'stamp';
+    stamp.innerHTMLL = get('c-flag').textContent + '<br>' + (get('c-capital').textContent || currentCountry).toUpperCase();
+    get('stamps').appendChild(stamp);
+
+    get('scrapbook-empty').style.display = 'none';
+    const page = document.createElement('div');
+    page.className = 'scrapbook-page';
+    page.innerHTML =
+        '<div class="page-title">' + get('c-flag').textContent + ' ' + currentCountry.toUpperCase() + '</div>' +
+        '<p><span>CAPITAL</span>' + get('c-capital').textContent + '</p>' +
+        '<p><span>REGION</span>'  + get('c-region').textContent  + '</p>' +
+        '<p><span>LANGUAGE</span>'+ get('c-lang').textContent    + '</p>' +
+        '<p><span>NOTE</span>'    + get('fun-fact').textContent  + '</p>';
+    get('scrapbook-pages').prepend(page);
+
+    if (souvenirs[currentCountry]) {
+        get('souvenir-empty').style.display = 'none';
+        const item = document.createElement('div');
+        item.className = 'souvenir';
+        item.textContent = souvenirs[currentCountry].slice(0.3).toUpperCase();
+        item.setAttribute('data-name', souvenirs[currentCountry]);
+        get('souvenir-grid').appendChild(item);
+    }
+
+    loadChallenge(currentCountry);
+
+    if (['Norway','Iceland'].includes(currentCountry))                    markGoal('goal-1');
+    if (['Nepal','Switzerland','Peru','Austria'].includes(currentCountry)) markGoal('goal-2');
+    if (['Japan','France','Germany','Switzerland'].includes(currentCountry)) markGoal('goal-3');
+
+    if (visited.length === 1)  unlock('ach-first',    '[x] First Trip');
+    if (visited.length === 25) unlock('ach-25',       '[x] Visited 25 Countries');
+    if (['Nepal','Switzerland','Peru','Austria','Norway'].some(c => visited.includes(c))) unlock('ach-mountain','[x] Mountain Explorer');
+    if (['Japan','Italy','France','India','Mexico','Thailand'].filter(c => visited.includes(c)).length >= 3) unlock('ach-food','[x] International Food Critic');
+    if (regions.size >= 6) unlock('ach-continent','[x] Visited Every Continent');
+});
