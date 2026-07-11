@@ -415,3 +415,43 @@ button:disabled { opacity: 0.35; cursor: not-allowed; }
     color: #ccc;
     line-height: 2;
 }
+
+@keyframes pop {
+    0%   { transform: scale(0.85); opacity: 0; }
+    70%  { transform: scale(1.08); }
+    100% { transform: scale(1);    opacity: 1; }
+}
+
+@keyframes wobble {
+    0%,100% { transform: rotate(0deg); }
+    25%     { transform: rotate(-4deg); }
+    75%     { transform: rotate(4deg); }
+}
+
+@keyframes slidein {
+    from { transform: translateY(10px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+
+.stamp       { animation: pop 0.25s ease forwards; }
+.map-dot     { animation: slidein 0.2s ease forwards; }
+.ach.unlocked { animation: pop 0.3s ease forwards; }
+#country-info:not(.hidden) { animation: slidein 0.25s ease forwards; }
+
+#spin-btn.spinning { animation: wobble 0.15s ease infinite; }
+
+#visit-btn {
+    margin-top: 16px;
+    background: #fdf6f0;
+    color: #1a1a1a;
+    border: 2px dashed #1a1a1a;
+    letter-spacing: 1px;
+}
+#visit-btn:hover { background: #1a1a1a; color: #fdf6f0; border-style: solid; }
+#visit-btn.visited { opacity: 0.35; cursor: not-allowed; border-style: dashed; }
+
+.card-title { text-transform: lowercase; }
+
+#cat-bar { border-bottom: 2px dashed #1a1a1a; }
+
+.scrapbook-page { border: 1px dashed #ccc; background: #fffdf9; }

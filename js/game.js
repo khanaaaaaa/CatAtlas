@@ -38,15 +38,23 @@ const challenges = {
     'New Zealand': { q:'What are the indigenous people of New Zealand called?',a:'Maori',           w:['Inuit','Aboriginal'] }
 };
 
+const spinMessages = [
+    'ooh ooh ooh...', 'hmm let me see...', 'closing my eyes...', 'spinning...', 'where to next...', 'not there... not there...'
+];
+
+const visitReactions = [
+    'packing my bags!', 'let\'s gooo!', 'i\'ve always wanted to go here!', 'adding this to my memories.', 'another stamp for the passport!', 'this place looks amazing.'
+];
+
 const tips = [
-    { el:'section-profile',      text:'This is your cat. Stats grow as you travel.' },
-    { el:'section-explore',      text:'Spin the globe to land on a random country.' },
-    { el:'section-challenge',    text:'Answer the mini challenge to earn bonus knowledge.' },
-    { el:'section-map',          text:'Your world map fills up as you visit countries.' },
-    { el:'section-passport',     text:'Collect a passport stamp from every country.' },
-    { el:'section-scrapbook',    text:'Your scrapbook saves facts from every trip.' },
-    { el:'section-souvenirs',    text:'Some countries give you a unique souvenir.' },
-    { el:'section-achievements', text:'Complete achievements to become a Legendary Explorer.' }
+    { el:'section-profile',      text:'that\'s you! your stats grow the more you travel.' },
+    { el:'section-explore',      text:'spin the globe and see where the wind takes you.' },
+    { el:'section-challenge',    text:'answer the quiz to earn extra knowledge points.' },
+    { el:'section-map',          text:'every country you visit shows up here.' },
+    { el:'section-passport',     text:'collect stamps from every country you visit.' },
+    { el:'section-scrapbook',    text:'your scrapbook fills up with memories as you go.' },
+    { el:'section-souvenirs',    text:'some places leave you with a little something.' },
+    { el:'section-achievements', text:'keep exploring to unlock these.' }
 ];
 let tipStep = 0;
 
@@ -134,29 +142,40 @@ const countries = [
 get('spin-btn').addEventListener('click', () => {
     const btn = get('spin-btn');
     btn.disabled = true;
-    btn.textContent = 'SPINNING...';
+    btn.classList.add('spinning');
+    btn.textContent = spinMessages[Math.floor(Math.random() * spinMessages.length)];
     tone(300,'sine',0.06,0.08);
 
     setTimeout(() => {
         const c = countries[Math.floor(Math.random() * countries.length)];
         currentCountry = c.name;
 
-        set('c-flag',   c.name.slice(0,2).toUpperCase());
-        set('c-name',     currentCountry.toUpperCase());
+        set('c-flag',     c.name.slice(0,2).toUpperCase());
+        set('c-name',     currentCountry);
         set('c-capital',  c.capital);
         set('c-region',   c.region);
         set('c-pop',      c.pop);
         set('c-lang',     c.lang);
         set('c-currency', c.currency);
         set('c-area',     c.area);
-        set('c-borders',  c.borders ? c.borders + ' countries' : 'None');
+        set('c-borders',  c.borders ? c.borders + ' countries' : 'none');
         set('c-timezone', c.tz);
         set('fun-fact',   c.fact);
 
+        const vBtn = get('visit-btn');
+        if (visited.includes(currentCountry)) {
+            vBtn.textContent = 'already been here!';
+            vBtn.classList.add('visited');
+        } else {
+            vBtn.textContent = "let's go here!";
+            vBtn.classList.remove('visited');
+        }
+
         get('country-info').classList.remove('hidden');
+        btn.classList.remove('spinning');
         btn.disabled = false;
-        btn.textContent = 'SPIN THE GLOBE';
-    }, 600);
+        btn.textContent = 'spin again';
+    }, 700);
 });
 
 get('visit-btn').addEventListener('click', () => {
@@ -166,6 +185,10 @@ get('visit-btn').addEventListener('click', () => {
     tone(440,'sine',0.1,0.1);
     setTimeout(() => tone(550,'sine',0.1,0.1), 60);
     setTimeout(() => tone(660,'sine',0.1,0.1), 120);
+
+    get('visit-btn').textContent = visitReactions[Math.floor(Math.random() * visitReactions.length)];
+    get('visit-btn').classList.add('visited');
+    setTimeout(() => { get('visit-btn').textContent = 'already been here!'; }, 1800);
 
     set('p-trips', visited.length);
     knowledge = Math.min(100, knowledge + 10);
@@ -178,7 +201,7 @@ get('visit-btn').addEventListener('click', () => {
     set('rep-title', rep);
     set('bar-rep', rep);
 
-    set('map-count', visited.length + ' countries visited.');
+    set('map-count', visited.length === 1 ? '1 country so far!' : visited.length + ' countries and counting!');
     const dot = document.createElement('div');
     dot.className = 'map-dot';
     dot.textContent = currentCountry.slice(0, 3).toUpperCase();
@@ -217,11 +240,11 @@ get('visit-btn').addEventListener('click', () => {
     if (['Nepal','Switzerland','Peru','Austria'].includes(currentCountry))   markGoal('goal-2');
     if (['Japan','France','Germany','Switzerland'].includes(currentCountry)) markGoal('goal-3');
 
-    if (visited.length === 1)  unlock('ach-first', '[x] First Trip');
-    if (visited.length === 25) unlock('ach-25',    '[x] Visited 25 Countries');
-    if (['Nepal','Switzerland','Peru','Austria','Norway'].some(c => visited.includes(c)))                                    unlock('ach-mountain', '[x] Mountain Explorer');
-    if (['Japan','Italy','France','India','Mexico','Thailand'].filter(c => visited.includes(c)).length >= 3)                 unlock('ach-food',     '[x] International Food Critic');
-    if (regions.size >= 6)                                                                                                   unlock('ach-continent','[x] Visited Every Continent');
+    if (visited.length === 1)  unlock('ach-first', '[x] first trip taken');
+    if (visited.length === 25) unlock('ach-25',    '[x] 25 countries visited');
+    if (['Nepal','Switzerland','Peru','Austria','Norway'].some(c => visited.includes(c)))                                    unlock('ach-mountain', '[x] mountain explorer');
+    if (['Japan','Italy','France','India','Mexico','Thailand'].filter(c => visited.includes(c)).length >= 3)                 unlock('ach-food',     '[x] international food critic');
+    if (regions.size >= 6)                                                                                                   unlock('ach-continent','[x] visited every continent');
 });
 
 function loadChallenge(country) {
