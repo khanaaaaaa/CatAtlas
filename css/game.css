@@ -135,3 +135,241 @@ body {
     background: #fdf6f0;
     color: #1a1a1a;
 }
+
+#main-stage {
+    margin-top: 56px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 20px 0;
+    overflow-y: auto;
+    padding-bottom: flex-start;
+}
+
+.img-frame {
+    border: 2px solid #1a1a1a;
+    padding: 4px;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.img-frame img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    display: block;
+}
+
+.img-frame {
+    border: 2px solid #1a1a1a;
+    padding: 4px;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.img-frame img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    display: block;
+}
+
+.img-frame label {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.24rem;
+    color: #aaa;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+.img-frame label:hover {
+    color: #1a1a1a;
+}
+
+.img-frame input {
+    display: none;
+}
+
+#stage-cat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#p-name {
+    font-size: 0.5rem;
+    letter-spacing: 3px;
+}
+
+#p-trips-label {
+    font-size: 0.3rem;
+    color: #aaa;
+    letter-spacing: 1px;
+}
+
+#stage-explore {
+    width: 100%;
+    max-width: 500px;
+    border: 2px solid #1a1a1a;
+    background: #fff;
+    padding: 28px 24px;
+    position: relative;
+}
+
+#stage-label {
+    font-size: 0.36rem;
+    color: #aaa;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    text-transform: lowercase;
+}
+
+#spin-btn {
+    width: 100%;
+    font-size: 'Press Start 2P', monospace;
+    font-size: 0.55rem;
+    padding: 18px;
+    background: #1a1a1a;
+    color: #fdf6f0;
+    border: 2px solid #1a1a1a;
+    cursor: pointer;
+    letter-spacing: 3px;
+    display: block;
+    margin: 0;
+    transition: background 0.15s, color 0.15s, transform 0.1s;
+    position: relative;
+    overflow: hidden;
+}
+
+#spin-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -70%;
+    width: 50%; height: 200%;
+    background: rgba(255,255,255,0.08);
+    transform: rotate(25deg);
+    transition: left 0.4s ease;
+}
+
+#spin-btn:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+#spin-btn:hover::after {
+    left: 140%;
+}
+
+#spin-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#spin-btn.spinning {
+    animation: whole 0.15s ease infinite;
+}
+
+#country-info { margin-top: 20px; }
+#country-info.hidden { display: none; }
+#country-info:not(.hidden) { animation: slideIn 0.25s ease forwards; }
+
+#country-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed #ddd;
+}
+
+#c-flag {
+    font-size: 0.5rem;
+    font-weight: bold;
+    background: #1a1a1a;
+    color: #fdf6f0; 
+    padding: 4px 7px; 
+    letter-spacing: 2px; 
+}
+#c-name { font-size: 0.52rem; letter-spacing: 2px; }
+
+#fact-grid p {
+    font-size: 0.32rem;
+    padding: 5px 0;
+    border-bottom: 1px dashed #f0e8e0;
+    display: flex;
+    gap: 10px;
+}
+#fact-grid p span:first-child {
+    color: #bbb;
+    min-width: 90px;
+}
+
+#fun-fact {
+    margin: 14px 0;
+    font-size: 0.33rem;
+    line-height: 2.4;
+    color: #555;
+    border-left: 3px solid #1a1a1a;
+    padding-left: 12px;
+    background: #fffdf9;
+    padding: 10px 12px;
+}
+
+#visit-btn {
+    width: 100%;
+    margin-top: 16px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.4rem; padding: 14px;
+    background: #fdf6f0; color: #1a1a1a;
+    border:2px dashed #1a1a1a; cursor: pointer;
+    letter-spacing: 2px; display: block;
+    transition: background 0.15s, color 0.15s, border-style 0.15s;
+}
+
+#visit-btn:hover {
+    background: #1a1a1a;
+    color: #fdf6f0;
+    border-style: solid;
+}
+
+#visit-btn.visited {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+#dock {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 100;
+    background: #fdf6f0;
+    border-top: 2px dashed #1a1a1a;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 64px;
+    padding: 0 8px;
+}
+
+.dock-btn {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.22rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 8px;
+    width: auto;
+    margin: 0;
+    letter-spacing: 0;
+    transition: color 0.15s, transform 0.15s;
+}
+.dock-btn:hover, .dock-btn.active { color: #1a1a; transform: translateY(-3px); }
+.dock-icon { font-size: 0.3rem; }
+.dock-label { font-size: 0.2rem; letter-spacing: 1px; }
