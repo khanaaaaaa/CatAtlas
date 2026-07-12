@@ -77,26 +77,35 @@ setInterval(() => {
     map.panTo([20 + Math.sin(angle) * 6, 10 + angle * 0.3], { animate: true, duration: 2 });
 }, 2200);
 
-async function fetchFact() {
-    try {
-        const res = await fetch('https://restcountries.com/v3.1/all?fields=name,capital,population');
-        const all = await res.json();
-        const c   = all[Math.floor(Math.random() * all.length)];
-        const factEl = document.getElementById('country-fact');
-        document.getElementById('fact-text').textContent =
-            c.name.common.toUpperCase() + '  --  Capital: ' + (c.capital?.[0] ?? 'Unknown') + '  --  Pop: ' + c.population.toLocaleString();
-        factEl.classList.remove('hidden');
-        factEl.style.animation = 'none';
-        factEl.offsetHeight;
-        factEl.style.animation = '';
-    } catch(e) {
-        document.getElementById('fact-text').textContent = 'Loading world data...';
-        document.getElementById('country-fact').classList.remove('hidden');
-    }
+const factPool = [
+    'Canada has the longest coastline of any country.',
+    'Japan has the world\'s oldest company, founded in 578 AD.',
+    'France is the most visited country in the world.',
+    'Brazil contains 60% of the Amazon rainforest.',
+    'Iceland runs on nearly 100% renewable energy.',
+    'New Zealand was the first country to give women the right to vote.',
+    'China borders more countries than any other nation.',
+    'India invented the number zero and chess.',
+    'Australia is the only country that is also a continent.',
+    'Nepal is home to 8 of the world\'s 10 tallest mountains.',
+    'South Korea has the fastest average internet speed in the world.',
+    'Portugal is the oldest nation-state in Europe, founded in 1143.',
+    'Indonesia is the world\'s largest archipelago with over 17,000 islands.',
+    'South Africa has three capital cities.',
+    'Turkey is home to the oldest known temple, Gobekli Tepe.'
+];
+
+function showFact() {
+    const factEl = document.getElementById('country-fact');
+    document.getElementById('fact-text').textContent = factPool[Math.floor(Math.random() * factPool.length)];
+    factEl.classList.remove('hidden');
+    factEl.style.animation = 'none';
+    factEl.offsetHeight;
+    factEl.style.animation = '';
 }
 
-fetchFact();
-setInterval(fetchFact, 6000);
+showFact();
+setInterval(showFact, 6000);
 
 document.getElementById('cat-img').src = cat.img;
 document.getElementById('dialogue-name').textContent = cat.name.toUpperCase();

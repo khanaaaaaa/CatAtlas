@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CatAtlas</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="game.css">
+    <link rel="stylesheet" href="../css/game.css">
 </head>
 <body>
 
@@ -14,7 +14,7 @@
             <img id="bar-img" src="" alt="cat">
             <div id="bar-info">
                 <span id="bar-name"></span>
-                <span id="bar-rep">Local Tourist</span>
+                <span id="bar-rep">local tourist</span>
             </div>
         </div>
         <div id="bar-stats">
@@ -35,43 +35,22 @@
         <button id="tip-btn">OK</button>
     </div>
 
-    <div id="game-content">
+    <!-- MAIN STAGE -->
+    <div id="main-stage">
+        <div id="stage-cat">
+            <div class="img-frame">
+                <img id="cat-img" src="" alt="cat">
+                <label for="cat-upload">change</label>
+                <input type="file" id="cat-upload" accept="image/*">
+            </div>
+            <div id="stage-cat-info">
+                <p id="p-name"></p>
+                <p id="p-trips-label">0 trips</p>
+            </div>
+        </div>
 
-        <section class="card" id="section-profile">
-            <div class="card-title">my travel buddy</div>
-            <div id="profile-top">
-                <div class="img-frame">
-                    <img id="cat-img" src="" alt="cat">
-                    <label for="cat-upload">CHANGE</label>
-                    <input type="file" id="cat-upload" accept="image/*">
-                </div>
-                <div id="profile-fields">
-                    <p><span>NAME</span><span id="p-name"></span></p>
-                    <p><span>TYPE</span><span id="p-type"></span></p>
-                    <p><span>FOOD</span><span id="p-food"></span></p>
-                    <p><span>TRIPS</span><span id="p-trips">0</span></p>
-                </div>
-            </div>
-            <div id="stats">
-                <div class="stat-row"><span>ENERGY</span><div class="bar"><div class="fill" style="width:85%"></div></div><small>85</small></div>
-                <div class="stat-row"><span>CURIOSITY</span><div class="bar"><div class="fill" style="width:92%"></div></div><small>92</small></div>
-                <div class="stat-row"><span>COURAGE</span><div class="bar"><div class="fill" style="width:70%"></div></div><small>70</small></div>
-                <div class="stat-row"><span>KNOWLEDGE</span><div class="bar"><div class="fill" id="knowledge-fill" style="width:0%"></div></div><small id="knowledge-val">0</small></div>
-            </div>
-            <div id="goals">
-                <div class="card-title" style="margin-top:16px">things i want to do</div>
-                <p id="goal-1">[ ] see the northern lights</p>
-                <p id="goal-2">[ ] climb a mountain</p>
-                <p id="goal-3">[ ] ride a train</p>
-            </div>
-            <div id="reputation">
-                <div class="card-title" style="margin-top:16px">how people know me</div>
-                <p id="rep-title">Local Tourist</p>
-            </div>
-        </section>
-
-        <section class="card" id="section-explore">
-            <div class="card-title">where should we go?</div>
+        <div id="stage-explore">
+            <div id="stage-label">where should we go?</div>
             <button id="spin-btn">spin the globe</button>
             <div id="country-info" class="hidden">
                 <div id="country-header">
@@ -91,50 +70,115 @@
                 <div id="fun-fact"></div>
                 <button id="visit-btn">let's go here!</button>
             </div>
-        </section>
-
-        <section class="card" id="section-challenge">
-            <div class="card-title">pop quiz!</div>
-            <div id="challenge-box">
-                <p class="placeholder">spin the globe first...</p>
-            </div>
-        </section>
-
-        <section class="card" id="section-map">
-            <div class="card-title">places i've been</div>
-            <p id="map-count" class="placeholder">no trips yet. let's fix that.</p>
-            <div id="map-grid"></div>
-        </section>
-
-        <section class="card" id="section-passport">
-            <div class="card-title">my passport</div>
-            <p id="passport-empty" class="placeholder">still waiting for that first stamp...</p>
-            <div id="stamps"></div>
-        </section>
-
-        <section class="card" id="section-scrapbook">
-            <div class="card-title">my scrapbook</div>
-            <p id="scrapbook-empty" class="placeholder">nothing here yet. go explore!</p>
-            <div id="scrapbook-pages"></div>
-        </section>
-
-        <section class="card" id="section-souvenirs">
-            <div class="card-title">stuff i picked up</div>
-            <p id="souvenir-empty" class="placeholder">my bag is empty... for now.</p>
-            <div id="souvenir-grid"></div>
-        </section>
-
-        <section class="card" id="section-achievements">
-            <div class="card-title">things i'm proud of</div>
-            <div class="ach locked" id="ach-first">[ ] first trip taken</div>
-            <div class="ach locked" id="ach-mountain">[ ] mountain explorer</div>
-            <div class="ach locked" id="ach-food">[ ] international food critic</div>
-            <div class="ach locked" id="ach-25">[ ] 25 countries visited</div>
-            <div class="ach locked" id="ach-continent">[ ] visited every continent</div>
-        </section>
-
+        </div>
     </div>
 
-    <script src="game.js"></script>
+    <!-- DOCK -->
+    <div id="dock">
+        <button class="dock-btn" data-panel="panel-profile">
+            <span class="dock-icon">[ cat ]</span>
+            <span class="dock-label">profile</span>
+        </button>
+        <button class="dock-btn" data-panel="panel-challenge">
+            <span class="dock-icon">[ ? ]</span>
+            <span class="dock-label">quiz</span>
+        </button>
+        <button class="dock-btn" data-panel="panel-map">
+            <span class="dock-icon">[ . ]</span>
+            <span class="dock-label">map</span>
+        </button>
+        <button class="dock-btn" data-panel="panel-passport">
+            <span class="dock-icon">[ # ]</span>
+            <span class="dock-label">passport</span>
+        </button>
+        <button class="dock-btn" data-panel="panel-scrapbook">
+            <span class="dock-icon">[ ~ ]</span>
+            <span class="dock-label">scrapbook</span>
+        </button>
+        <button class="dock-btn" data-panel="panel-souvenirs">
+            <span class="dock-icon">[ * ]</span>
+            <span class="dock-label">souvenirs</span>
+        </button>
+        <button class="dock-btn" data-panel="panel-achievements">
+            <span class="dock-icon">[ x ]</span>
+            <span class="dock-label">achievements</span>
+        </button>
+    </div>
+
+    <!-- DRAWER -->
+    <div id="drawer" class="hidden">
+        <div id="drawer-inner">
+            <button id="drawer-close">close</button>
+
+            <div class="panel hidden" id="panel-profile">
+                <div class="card-title">my travel buddy</div>
+                <div id="profile-fields">
+                    <p><span>NAME</span><span id="p-name-d"></span></p>
+                    <p><span>TYPE</span><span id="p-type"></span></p>
+                    <p><span>FOOD</span><span id="p-food"></span></p>
+                    <p><span>TRIPS</span><span id="p-trips">0</span></p>
+                </div>
+                <div id="stats">
+                    <div class="stat-row"><span>ENERGY</span><div class="bar"><div class="fill" style="width:85%"></div></div><small>85</small></div>
+                    <div class="stat-row"><span>CURIOSITY</span><div class="bar"><div class="fill" style="width:92%"></div></div><small>92</small></div>
+                    <div class="stat-row"><span>COURAGE</span><div class="bar"><div class="fill" style="width:70%"></div></div><small>70</small></div>
+                    <div class="stat-row"><span>KNOWLEDGE</span><div class="bar"><div class="fill" id="knowledge-fill" style="width:0%"></div></div><small id="knowledge-val">0</small></div>
+                </div>
+                <div id="goals">
+                    <div class="card-title" style="margin-top:16px">things i want to do</div>
+                    <p id="goal-1">[ ] see the northern lights</p>
+                    <p id="goal-2">[ ] climb a mountain</p>
+                    <p id="goal-3">[ ] ride a train</p>
+                </div>
+                <div id="reputation">
+                    <div class="card-title" style="margin-top:16px">how people know me</div>
+                    <p id="rep-title">local tourist</p>
+                </div>
+            </div>
+
+            <div class="panel hidden" id="panel-challenge">
+                <div class="card-title">pop quiz!</div>
+                <div id="challenge-box">
+                    <p class="placeholder">spin the globe first...</p>
+                </div>
+            </div>
+
+            <div class="panel hidden" id="panel-map">
+                <div class="card-title">places i've been</div>
+                <p id="map-count" class="placeholder">no trips yet. let's fix that.</p>
+                <div id="map-grid"></div>
+            </div>
+
+            <div class="panel hidden" id="panel-passport">
+                <div class="card-title">my passport</div>
+                <p id="passport-empty" class="placeholder">still waiting for that first stamp...</p>
+                <div id="stamps"></div>
+            </div>
+
+            <div class="panel hidden" id="panel-scrapbook">
+                <div class="card-title">my scrapbook</div>
+                <p id="scrapbook-empty" class="placeholder">nothing here yet. go explore!</p>
+                <div id="scrapbook-pages"></div>
+            </div>
+
+            <div class="panel hidden" id="panel-souvenirs">
+                <div class="card-title">stuff i picked up</div>
+                <p id="souvenir-empty" class="placeholder">my bag is empty... for now.</p>
+                <div id="souvenir-grid"></div>
+            </div>
+
+            <div class="panel hidden" id="panel-achievements">
+                <div class="card-title">things i'm proud of</div>
+                <div class="ach locked" id="ach-first">[ ] first trip taken</div>
+                <div class="ach locked" id="ach-mountain">[ ] mountain explorer</div>
+                <div class="ach locked" id="ach-food">[ ] international food critic</div>
+                <div class="ach locked" id="ach-25">[ ] 25 countries visited</div>
+                <div class="ach locked" id="ach-continent">[ ] visited every continent</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/game.js"></script>
+
 </body>
 </html>
