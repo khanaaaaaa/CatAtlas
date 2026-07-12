@@ -76,13 +76,14 @@ function tone(freq, type, dur, vol) {
 function set(id, val) { document.getElementById(id).textContent = val; }
 function get(id) { return document.getElementById(id); }
 
-get('bar-img').src  = cat.img;
-get('cat-img').src  = cat.img;
-get('tip-img').src  = cat.img;
+get('bar-img').src = cat.img;
+get('cat-img').src = cat.img;
+get('tip-img').src = cat.img;
 set('bar-name', cat.name.toUpperCase());
-set('p-name',   cat.name);
-set('p-type',   cat.type);
-set('p-food',   cat.food);
+set('p-name', cat.name);
+set('p-name-d', cat.name);
+set('p-type', cat.type);
+set('p-food', cat.food);
 
 get('cat-upload').addEventListener('change', e => {
     if (!e.target.files[0]) return;
@@ -103,6 +104,34 @@ function nextTip() {
     get('tip-box').classList.remove('hidden');
     get(tips[tipStep].el).scrollIntoView({ behavior:'smooth', block:'center' });
 }
+
+document.querySelectorAll('.dock-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const panelId = btn.dataset.panel;
+        const drawer = get('drawer');
+        const already = btn.classList.contains('active');
+
+        document.querySelectorAll('.dock-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+
+        if (already) {
+            drawer.classList.add('closing');
+            setTimeout(() => { drawer.classList.add('hidden'); drawer.classList.remove('closing'); }, 180);
+        } else {
+            btn.classList.add('active');
+            get(panelId).classList.add('active');
+            drawer.classList.remove('hidden', 'closing');
+        }
+    });
+});
+
+get('drawer-close').addEventListener('click', () => {
+    document.querySelectorAll('.dock-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    const drawer = get('drawer');
+    drawer.classList.add('closing');
+    setTimeout(() => { drawer.classList.add('hidden'); drawer.classList.remove('closing'); }, 180);
+});
 
 get('tip-btn').addEventListener('click', () => { tipStep++; nextTip(); });
 
@@ -191,6 +220,7 @@ get('visit-btn').addEventListener('click', () => {
     setTimeout(() => { get('visit-btn').textContent = 'already been here!'; }, 1800);
 
     set('p-trips', visited.length);
+    set('p-trips-label', visited.length + (visited.length === 1 ? ' trip' : ' trips'));
     knowledge = Math.min(100, knowledge + 10);
     get('knowledge-fill').style.width = knowledge + '%';
     set('knowledge-val', knowledge);
