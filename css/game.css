@@ -373,3 +373,117 @@ body {
 .dock-btn:hover, .dock-btn.active { color: #1a1a; transform: translateY(-3px); }
 .dock-icon { font-size: 0.3rem; }
 .dock-label { font-size: 0.2rem; letter-spacing: 1px; }
+
+#drawer {
+    position: fixed;
+    bottom: 64px; left: 0; right: 0;
+    z-index: 200;
+    height: 55vh;
+    background: #fdf6f0;
+    border-top: 2px solid #1a1a1a;
+    box-shadow: 0 -4px 0 #1a1a1a;
+    animation: drawerUp 0.22s ease forwards;
+    overflow: hidden;
+}
+#drawer.hidden { display: none; }
+#drawer.closing { animation: drawerDown 0.18s ease forwards; }
+
+@keyframes drawerUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes drawerDown { from { transform: traslateY(0); } to { transform: translateY(100%); } }
+
+#drawer-inner {
+    height: 100%;
+    overflow-y: auto;
+    padding: 16px 2px 24px;
+}
+
+#drawer-close {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.28rem;
+    background: none;
+    border: 1px solid #ccc;
+    color: #aaa;
+    padding: 5px 10px;
+    cursor: pointer;
+    float: right;
+    width: auto;
+    margin: 0 0 12px 0;
+    letter-spacing: 1px;
+    display: block;
+    transition: color 0.15s, border-color 0.15s;
+}
+
+#drawer-close:hover {
+    color: #1a1a1a;
+    border-color: #1a1a1a;
+    background: none;
+}
+
+.panel {
+    display: none;
+}
+
+.panel.active {
+    display: block;
+    animation: slidein 0.2s ease forwards;
+}
+
+.card-title {
+    font-size: 0.36rem;
+    letter-spacing: 4px;
+    margin-bottom: 14px; color: #888;
+    text-transform: lowercase;
+}
+
+#profile-fields p {
+    font-size: 0.35rem; padding: 6px 0;
+    border-bottom: 1px dashed #eee;
+    display: flex;
+    gap: 10px;
+}
+#profile-fields span:first-child {
+    color: #aaa;
+    min-width: 48px;
+}
+
+#stats { margin-bottom: 4px; }
+.stat-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 0.3rem; }
+.stat-row > span { min-width: 80px; color: #aaa; }
+.bar { flex: 1; height: 6px; background: #eee; border: 1px solid #ddd; }
+.fill { height: 100%; background: #1a1a1a; transition: width 0.4s ease; }
+.stat-row small { font-size: 0.3rem; min-width: 20px; text-align: right; }
+
+#challenge-box { font-size: 0.36rem; }
+.challenge-q { line-height: 2.2; margin-bottom: 14px; }
+.challenge-opts { display: flex; flex-direction: column; gap: 8px; }
+.challenge-opts button {
+    text-align: left; font-size: 0.32rem; padding: 10px 14px; 
+    background: #fdf6f0; color: #1a1a1a; border: 1px solid #ccc;
+    cursor: pointer; letter-spacing: 1px; width: 100%; margin-top: 0;
+    font-family: 'Press Start 2P', monospace;
+    transition: background 0.15s, border-color 0.15s;
+}
+.challenge-opts button:hover { background: #f0e8e0; border-color: #1a1a1a; }
+.challenge-opts button.correct { background: #e8f5e9; border-color: #1a1a1a; }
+.challenge-opts button.wrong { background: #fce4e4; border-color: #1a1a1a; }
+
+#map-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+
+.stamp {
+    border: 2px solid #1a1a1a; padding: 8px 10px;
+    font-size: 0.28rem; letter-spacing: 1px;
+    text-align: center; line-height: 2;
+    animation: pop 0.25s ease forwards;
+}
+
+.scrapbook-page {
+    border: 1px dashed #ccc;
+    background: #fffdf9;
+    padding: 14px; margin-bottom: 12px;
+    font-size: 032rem; line-height: 2.4;
+}
+
+.page-title {
+    font-size: 0.38rem; border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 8px; margin-bottom: 10px;
+}
