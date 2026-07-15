@@ -47,14 +47,13 @@ const visitReactions = [
 ];
 
 const tips = [
-    { el:'section-profile',      text:'that\'s you! your stats grow the more you travel.' },
-    { el:'section-explore',      text:'spin the globe and see where the wind takes you.' },
-    { el:'section-challenge',    text:'answer the quiz to earn extra knowledge points.' },
-    { el:'section-map',          text:'every country you visit shows up here.' },
-    { el:'section-passport',     text:'collect stamps from every country you visit.' },
-    { el:'section-scrapbook',    text:'your scrapbook fills up with memories as you go.' },
-    { el:'section-souvenirs',    text:'some places leave you with a little something.' },
-    { el:'section-achievements', text:'keep exploring to unlock these.' }
+    { el:'panel-profile',      text:'that\'s you! your stats grow the more you travel.' },
+    { el:'panel-challenge',    text:'answer the quiz to earn extra knowledge points.' },
+    { el:'panel-map',          text:'every country you visit shows up here.' },
+    { el:'panel-passport',     text:'collect stamps from every country you visit.' },
+    { el:'panel-scrapbook',    text:'your scrapbook fills up with memories as you go.' },
+    { el:'panel-souvenirs',    text:'some places leave you with a little something.' },
+    { el:'panel-achievements', text:'keep exploring to unlock these.' }
 ];
 let tipStep = 0;
 
@@ -102,7 +101,6 @@ function nextTip() {
     if (tipStep >= tips.length) { get('tip-box').classList.add('hidden'); return; }
     set('tip-text', tips[tipStep].text);
     get('tip-box').classList.remove('hidden');
-    get(tips[tipStep].el).scrollIntoView({ behavior:'smooth', block:'center' });
 }
 
 document.querySelectorAll('.dock-btn').forEach(btn => {
