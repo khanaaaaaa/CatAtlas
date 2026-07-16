@@ -2,8 +2,8 @@
 
 body {
     font-family: 'VT323', monospace;
-    background: #e8f4f8;
-    color: #111;
+    background: #f5f0e8;
+    color: #1a1a1a;
     height: 100vh;
     overflow: hidden;
     font-size: 20px;
@@ -23,7 +23,7 @@ body {
     position: fixed;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(to top, rgba(232,244,248,0.95) 0%, rgba(232,244,248,0.4) 50%, transparent 100%);
+    background: linear-gradient(to top, rgba(245,240,232,0.95) 0%, rgba(245,240,232,0.4) 50%, transparent 100%);
     pointer-events: none;
 }
 
@@ -33,12 +33,12 @@ body {
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
-    background: #ffff99;
-    border: 2px solid #111;
+    background: #e8dcc8;
+    border: 2px solid #1a1a1a;
     padding: 6px 14px;
     font-size: 1.2rem;
     white-space: nowrap;
-    color: #111;
+    color: #1a1a1a;
     font-family: 'Courier New', monospace;
 }
 
@@ -62,8 +62,8 @@ body {
 #cat-frame {
     width: 80px;
     height: 80px;
-    border: 3px solid #111;
-    background: #fff;
+    border: 3px solid #1a1a1a;
+    background: #faf7f2;
     flex-shrink: 0;
     animation: catBob 2.5s step-end infinite;
 }
@@ -91,9 +91,9 @@ body {
 
 #dialogue-box {
     width: 100%;
-    background: #fff;
-    border: 3px solid #111;
-    border-top: 4px solid #008080;
+    background: #faf7f2;
+    border: 3px solid #1a1a1a;
+    border-top: 4px solid #c17f4a;
     padding: 12px 16px 10px;
     min-height: 80px;
 }
@@ -101,14 +101,14 @@ body {
 #dialogue-name {
     font-family: 'Press Start 2P', monospace;
     font-size: 0.45rem;
-    color: #008080;
+    color: #c17f4a;
     margin-bottom: 8px;
     letter-spacing: 2px;
 }
 
 #dialogue-text { font-size: 1.4rem; line-height: 1.5; color: #111; min-height: 36px; }
 
-.cursor { font-size: 1.4rem; color: #adff2f; animation: blink 0.5s step-start infinite; }
+.cursor { font-size: 1.4rem; color: #c17f4a; animation: blink 0.5s step-start infinite; }
 
 @keyframes blink { 50% { opacity: 0; } }
 
@@ -119,31 +119,31 @@ body {
     font-family: 'Press Start 2P', monospace;
     font-size: 0.45rem;
     padding: 10px 12px;
-    background: #008080;
-    color: #fff;
-    border: 3px solid #111;
+    background: #2d2d2d;
+    color: #f5f0e8;
+    border: 3px solid #1a1a1a;
     cursor: pointer;
     letter-spacing: 1px;
 }
 
-#nextBtn:hover { background: #adff2f; color: #111; }
+#nextBtn:hover { background: #c17f4a; color: #f5f0e8; }
 
 #skipBtn {
     font-family: 'VT323', monospace;
     font-size: 1.3rem;
     padding: 10px 12px;
-    background: #fff;
+    background: #faf7f2;
     color: #aaa;
     border: 2px solid #ccc;
     cursor: pointer;
 }
 
-#skipBtn:hover { color: #111; border-color: #111; }
+#skipBtn:hover { color: #1a1a1a; border-color: #1a1a1a; }
 
 #progress-dots { display: flex; gap: 5px; padding-left: 2px; }
 
 .dot { width: 8px; height: 8px; border: 2px solid #ccc; background: transparent; }
-.dot.done { background: #ff69b4; border-color: #ff69b4; }
+.dot.done { background: #c17f4a; border-color: #c17f4a; }
 
 #enterBtn {
     position: fixed;
@@ -154,13 +154,13 @@ body {
     font-family: 'Press Start 2P', monospace;
     font-size: 0.5rem;
     padding: 12px 34px;
-    background: #adff2f;
-    color: #111;
-    border: 3px solid #111;
+    background: #c17f4a;
+    color: #f5f0e8;
+    border: 3px solid #1a1a1a;
     cursor: pointer;
     letter-spacing: 2px;
     animation: blink 1.2s step-start infinite;
 }
 
-#enterBtn:hover { background: #ff69b4; color: #fff; animation: none; }
+#enterBtn:hover { background: #2d2d2d; color: #f5f0e8; animation: none; }
 #enterBtn.hidden { display: none; }

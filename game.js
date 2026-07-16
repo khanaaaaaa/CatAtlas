@@ -202,6 +202,7 @@ get('spin-btn').addEventListener('click', () => {
         btn.classList.remove('spinning');
         btn.disabled = false;
         btn.textContent = 'spin again';
+        setMood('curious');
     }, 700);
 });
 
@@ -215,6 +216,7 @@ get('visit-btn').addEventListener('click', () => {
 
     get('visit-btn').textContent = visitReactions[Math.floor(Math.random() * visitReactions.length)];
     get('visit-btn').classList.add('visited');
+    setMood('excited');
     setTimeout(() => { get('visit-btn').textContent = 'already been here!'; }, 1800);
 
     set('p-trips', visited.length);
@@ -292,6 +294,7 @@ function answer(btn, chosen, correct) {
         btn.classList.add('correct');
         tone(600,'sine',0.12,0.1);
         setTimeout(() => tone(800,'sine',0.12,0.1), 80);
+        setMood('proud');
         knowledge = Math.min(100, knowledge + 5);
         get('knowledge-fill').style.width = knowledge + '%';
         set('knowledge-val', knowledge);
@@ -299,6 +302,7 @@ function answer(btn, chosen, correct) {
     } else {
         btn.classList.add('wrong');
         tone(200,'square',0.15,0.1);
+        setMood('stumped');
         document.querySelectorAll('.challenge-opts button').forEach(b => { if (b.textContent === correct) b.classList.add('correct'); });
     }
 }
@@ -311,4 +315,20 @@ function markGoal(id) {
 function unlock(id, text) {
     const el = get(id);
     if (el && el.classList.contains('locked')) { el.textContent = text; el.classList.replace('locked','unlocked'); }
+}
+
+function setMood(mood) {
+    const moods = {
+        curious: 'feeling: curious',
+        excited: 'feeling: excited!!',
+        proud:   'feeling: proud',
+        stumped: 'feeling: a little stumped',
+        happy:   'feeling: happy'
+    };
+    set('cat-mood', moods[mood] || 'feeling: curious');
+    const img = get('cat-img');
+    img.classList.remove('mood-happy','mood-sad','mood-excited');
+    if (mood === 'excited' || mood === 'proud') img.classList.add('mood-excited');
+    else if (mood === 'stumped') img.classList.add('mood-sad');
+    else if (mood === 'happy') img.classList.add('mood-happy');
 }

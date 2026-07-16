@@ -49,14 +49,12 @@ const loadingMessages = [
 
 window.addEventListener('load', () => {
     const bar  = document.getElementById('loadingBar');
-    const cat  = document.getElementById('loadingCat');
     const text = document.getElementById('loadingText');
     let progress = 0;
 
     const interval = setInterval(() => {
         progress = Math.min(progress + Math.random() * 18 + 4, 100);
         bar.style.width = progress + '%';
-        cat.style.left  = progress + '%';
         text.textContent = loadingMessages[Math.min(Math.floor(progress / 20), loadingMessages.length - 1)];
         sfxTick();
 
